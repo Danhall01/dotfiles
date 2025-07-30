@@ -1,0 +1,16 @@
+# Ignore everything
+*
+!/.gitignore
+
+# Folders that are included in dotfiles
+!/nvim/
+!/nvim/*
+!/nvim/**
+
+!/kitty/
+!/kitty/*
+!/kitty/**
+
+!/hypr/
+!/hypr/*
+!/hypr/**
