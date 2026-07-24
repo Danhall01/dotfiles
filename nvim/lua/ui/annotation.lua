@@ -1,0 +1,2 @@
+---@class dh.ui.config
+---@field startup_theme string

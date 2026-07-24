@@ -1,0 +1,1 @@
+---@class dh.module.config
