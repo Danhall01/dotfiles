@@ -117,8 +117,8 @@ end
 
 local function debug_virtual_text()
     require "nvim-dap-virtual-text".setup {
-        only_first_definition = false,
-        all_references = true,
+        only_first_definition = true,
+        all_references = false,
 
         comment = true,
         highlight_changed_variables = true,
@@ -129,7 +129,22 @@ local function debug_virtual_text()
 end
 
 local function debug_gui()
-    require "dapui".setup()
+    local dap = require "dap"
+    local dapui = require "dapui"
+    dapui.setup()
+
+    dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+    end
 end
 
 ---@param config dh.lsp.config

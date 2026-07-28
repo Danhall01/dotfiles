@@ -33,9 +33,9 @@ local function log_all(config)
     local i = log_index - 1
     for _, file in pairs(content) do
         local index = i
-        local ordering_index = log_index - i - 1
+        local ordering_index = string.format("%03d:", log_index - i - 1)
         table.insert(task_list, {
-            name = ordering_index .. ":GDB Debug Log#" .. tostring(index),
+            name = ordering_index .. "GDB Debug Log#" .. tostring(index),
             cmd = "cat \"" .. file .. "\"",
             cwd = vim.fn.getcwd()
         })

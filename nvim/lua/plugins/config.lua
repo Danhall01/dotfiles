@@ -11,6 +11,10 @@ local config = {
             log_name = "dap",
         },
         cmake_build_timeout = 3,
+        open_on_enter = true,
+        close_on_leave = false,
+        open_on_debug_exit = true,
+        close_on_debug_enter = true,
     },
 }
 
