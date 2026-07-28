@@ -2,7 +2,7 @@
 local status_line = {}
 
 ---@param config dh.ui.config
-local function navic(config)
+local function navic_setup(config)
     require "nvim-navic".setup {
         lsp = {
             auto_attach = true,
@@ -12,7 +12,7 @@ local function navic(config)
 end
 
 ---@param config dh.ui.config
-local function lualine(config)
+local function lualine_setup(config)
     require "lualine".setup {
         options = {
             icons_enabled = true,
@@ -53,7 +53,7 @@ local function lualine(config)
             lualine_z = {}
         },
         tabline = {
-            lualine_a = { "filename" },
+            lualine_a = { { "pretty_path", path_sep = "  " } },
             lualine_b = { function()
                 local nav = require "nvim-navic"
                 if nav.is_available() then
@@ -77,8 +77,8 @@ end
 
 ---@param config dh.ui.config
 function status_line.setup(config)
-    navic(config)
-    lualine(config)
+    navic_setup(config)
+    lualine_setup(config)
 end
 
 return status_line

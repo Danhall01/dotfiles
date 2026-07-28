@@ -32,6 +32,10 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
+    "lualine-pretty-path": {
+      "rev": "852cb06f3562bced4776a924e56a9e44d0ce634f",
+      "src": "https://github.com/bwpge/lualine-pretty-path"
+    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"

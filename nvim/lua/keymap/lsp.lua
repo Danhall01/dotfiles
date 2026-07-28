@@ -28,7 +28,7 @@ local function navigation(config)
                     { title = "Invalid filetype for operation", })
                 return
             end
-            vim.cmd("ClangdSwitchSourceHeader")
+            vim.cmd("LspClangdSwitchSourceHeader")
         end, { desc = "Swap between header and source file" })
     end
 

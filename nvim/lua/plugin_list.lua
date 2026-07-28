@@ -49,9 +49,10 @@ function plugins.setup()
         { src = github("nvim-telescope/telescope.nvim") },
 
         -- UI / Style
-        { src = github("SmiteshP/nvim-navic") },  --Required by lualine
+        { src = github("SmiteshP/nvim-navic") },        --Required by lualine
+        { src = github("bwpge/lualine-pretty-path") }, --Required by lualine
         { src = github("nvim-lualine/lualine.nvim") },
-        { src = github("rcarriga/nvim-notify") }, --Required by noice
+        { src = github("rcarriga/nvim-notify") },       --Required by noice
         { src = github("folke/noice.nvim") },
         { src = github("catgoose/nvim-colorizer.lua") },
         { src = github("lukas-reineke/indent-blankline.nvim") },

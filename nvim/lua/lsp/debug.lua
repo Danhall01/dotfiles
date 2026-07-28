@@ -117,8 +117,8 @@ end
 
 local function debug_virtual_text()
     require "nvim-dap-virtual-text".setup {
-        only_first_definition = true,
-        all_references = false,
+        only_first_definition = false,
+        all_references = true,
 
         comment = true,
         highlight_changed_variables = true,
