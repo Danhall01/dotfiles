@@ -23,17 +23,19 @@ end
 local function log_all(config)
     local overseer = require "overseer"
     local cwd = vim.fn.getcwd()
-    local content = vim.split(vim.fn.glob(cwd .. "/" .. config.path .. "*"), '\n', { trimempty = true })
-    log_index = #content + 1
+    local content = vim.fn.glob(cwd .. "/" .. config.path .. "*", false, true)
+    if vim.tbl_isempty(content) then return end
 
+    log_index = #content + 1
     table.sort(content, function(s1, s2) return s1:match("_(%d+)%.log") > s2:match("_(%d+)%.log") end)
+
     local task_list = {}
     local i = log_index - 1
     for _, file in pairs(content) do
         local index = i
         local ordering_index = log_index - i - 1
         table.insert(task_list, {
-            name = "(" .. ordering_index .. ")GDB Debug Log#" .. tostring(index),
+            name = ordering_index .. ":GDB Debug Log#" .. tostring(index),
             cmd = "cat \"" .. file .. "\"",
             cwd = vim.fn.getcwd()
         })
@@ -80,7 +82,7 @@ local function attach_log_task(config)
             vim.notify("Could not create logfile for DAP session: " .. dap_logfile.name, vim.diagnostic.severity.ERROR)
             return
         end
-        vim.notify("Created logfile: " .. dap_logfile.name, vim.diagnostic.severity.INFO)
+        vim.notify("Created logfile: " .. dap_logfile.name)
     end
     dap.listeners.after.event_output["overseer-debug-output"] = function(_, body)
         if not dap_logfile then return end
