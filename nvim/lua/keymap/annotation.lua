@@ -64,6 +64,10 @@
 ---@field run dh.keymap.config.keybind
 ---@field set_build_type dh.keymap.config.keybind
 
+---@class dh.keymap.config.overseer
+---@field actions dh.keymap.config.keybind
+---@field open_float dh.keymap.config.keybind
+
 ---@class dh.keymap.config.style
 ---@field toggle_colorizer dh.keymap.config.keybind
 
@@ -72,4 +76,5 @@
 ---@field lsp dh.keymap.config.lsp
 ---@field debug dh.keymap.config.debug
 ---@field cmake dh.keymap.config.cmake
+---@field overseer dh.keymap.config.overseer
 ---@field style dh.keymap.config.style

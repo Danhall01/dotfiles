@@ -37,7 +37,7 @@ local function lualine(config)
         sections = {
             lualine_a = { "mode" },
             lualine_b = { "branch", "diff", "diagnostics" },
-            lualine_c = {},
+            lualine_c = { { "overseer", label = "overseer: " } },
             lualine_x = { "encoding", "filetype" },
             lualine_y = { "lsp_status", "progress" },
             lualine_z = { "location", "fileformat" }

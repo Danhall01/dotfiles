@@ -4,6 +4,7 @@ local settings = {}
 local function editor_style()
     vim.opt.background = "dark"
     vim.opt.termguicolors = true
+    vim.o.winborder = "rounded"
 end
 
 local function behaviour()

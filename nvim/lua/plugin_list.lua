@@ -40,8 +40,8 @@ function plugins.setup()
         { src = github("theHamsta/nvim-dap-virtual-text") },
 
         -- LSP-Build
-        { src = github("akinsho/toggleterm.nvim") }, --Required by cmake-tools && overseer
-        { src = github("stevearc/overseer.nvim") },  --Required by cmake-tools
+        { src = github("akinsho/toggleterm.nvim"),                  version = "*" }, --Required by cmake-tools && overseer
+        { src = github("stevearc/overseer.nvim") },                                  --Required by cmake-tools
         { src = github("Civitasv/cmake-tools.nvim") },
 
         --Navigation

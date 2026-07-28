@@ -135,7 +135,8 @@
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
-      "src": "https://github.com/akinsho/toggleterm.nvim"
+      "src": "https://github.com/akinsho/toggleterm.nvim",
+      "version": "'*'"
     }
   }
 }

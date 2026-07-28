@@ -51,7 +51,7 @@ local function noice(config)
         },
         -- FOR NOW, THIS BREAKS THE CMDLINE SO THAT I CANNOT SEE ANYTHING: REMOVE WHEN FIXED
         cmdline = {
-            enabled = true,
+            enabled = false,
         },
         messages = {
             enabled = false,

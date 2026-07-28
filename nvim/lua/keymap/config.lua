@@ -62,6 +62,10 @@ local config = {
         run = { "<F5>" },
         set_build_type = { "<leader><F2>" },
     },
+    overseer = {
+        actions = { "<CR>" },
+        open_float = { "<C-CR>" },
+    },
     style = {
         toggle_colorizer = { "<leader>ct" }
     },
@@ -127,6 +131,10 @@ local validation = {
         build = keybinds.key,
         run = keybinds.key,
         set_build_type = keybinds.key,
+    },
+    overseer = {
+        actions = keybinds.key,
+        open_float = keybinds.key,
     },
     style = {
         toggle_colorizer = keybinds.key,

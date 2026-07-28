@@ -9,5 +9,7 @@ require "plugins.navigation".setup(config)
 require "plugins.typing".setup(config)
 ---@type dh.plugins.treesitter
 require "plugins.treesitter".setup(config)
----@type dh.plugins.workflow_c_cpp
-require "plugins.workflow_c_cpp".setup(config)
+---@type dh.plugins.c_cpp.overseer_cmake
+require "plugins.c_cpp.overseer_cmake".setup(config)
+---@type dh.plugins.c_cpp.overseer_dap
+require "plugins.c_cpp.overseer_dap".setup(config)

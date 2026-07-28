@@ -14,7 +14,7 @@ local function autostart()
 end
 
 
----@param config dh.autocmd.config
+---@param config dh.plugins.config
 function treesitter.setup(config)
     vim.api.nvim_create_augroup("autocmd_treesitter", { clear = true })
     autostart()
