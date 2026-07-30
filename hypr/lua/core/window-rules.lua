@@ -50,10 +50,25 @@ local function gamerules()
     local game_titles =
     "^(Warhammer 40000 Rogue Trader|World of Warcraft|Hearthstone|Diablo IV|Assassin's Creed Shadows)$"
     hl.window_rule {
-        name = "games",
+        name = "games-title",
         match = {
             title = game_titles,
             --class = games,
+        },
+        workspace = "special:gaming silent",
+        fullscreen = true,
+        float = true,
+        rounding = 0,
+        border_size = 0,
+        no_blur = true,
+        no_shadow = true,
+        no_anim = true,
+    }
+    local game_class = "^(bg3)$"
+    hl.window_rule {
+        name = "games-class",
+        match = {
+            class = game_class,
         },
         workspace = "special:gaming silent",
         fullscreen = true,
