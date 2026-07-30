@@ -10,7 +10,7 @@ end
 
 ---@param file string
 ---@param session_index number
-local function overseer_review_debug_log(file, session_index)
+local function overseer_cat_logfile(file, session_index)
     local overseer = require "overseer"
     return overseer.new_task {
         name = "GDB Debug Log#" .. tostring(session_index),
@@ -55,13 +55,13 @@ end
 
 ---@param config dh.plugins.config.overseer.debug_log
 local function attach_log_task(config)
-    local function dump_buffer()
+    local function create_logview_task()
         if not dap_logfile then return end
         dap_logfile.file:flush()
         dap_logfile.file:close()
 
         -- Dispatch task
-        overseer_review_debug_log(dap_logfile.name, log_index):start()
+        overseer_cat_logfile(dap_logfile.name, log_index):start()
         log_index = log_index + 1
         dap_logfile = nil
     end
@@ -92,8 +92,8 @@ local function attach_log_task(config)
             dap_logfile.file:flush()
         end
     end
-    dap.listeners.after.event_terminated["overseer-debug-output"] = dump_buffer
-    dap.listeners.after.event_exited["overseer-debug-output"] = dump_buffer
+    dap.listeners.after.event_terminated["overseer-debug-output"] = create_logview_task
+    dap.listeners.after.event_exited["overseer-debug-output"] = create_logview_task
 end
 
 ---@param config dh.plugins.config.overseer.debug_log
@@ -106,7 +106,7 @@ local function register_user_commands(config)
             "/" ..
             config.path ..
             config.log_name .. get_current_date() .. string.format("_%03d", log_index) .. ".log"
-        overseer_review_debug_log(fname, index):start()
+        overseer_cat_logfile(fname, index):start()
     end, {
         desc = "(ext) Runs a task to open the log file of given index in overseer",
         nargs = 1,

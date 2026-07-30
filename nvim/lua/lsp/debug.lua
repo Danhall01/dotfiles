@@ -9,14 +9,14 @@ local function setup_adapters()
     dap.adapters.gdb = {
         type = "executable",
         command = "gdb",
-        args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+        args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
     }
 
     -- Rust
     dap.adapters["rust-gdb"] = {
         type = "executable",
         command = "rust-gdb",
-        args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+        args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
     }
 
     -- Lua
@@ -35,7 +35,7 @@ local function setup_config()
             type = "gdb",
             request = "launch",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
             args = {}, -- provide arguments if needed
             cwd = "${workspaceFolder}",
@@ -46,23 +46,23 @@ local function setup_config()
             type = "gdb",
             request = "attach",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
             pid = function()
-                local name = vim.fn.input('Executable name (filter): ')
+                local name = vim.fn.input("Executable name (filter): ")
                 return require("dap.utils").pick_process({ filter = name })
             end,
-            cwd = '${workspaceFolder}'
+            cwd = "${workspaceFolder}"
         },
         {
-            name = 'Attach to gdbserver :1234',
-            type = 'gdb',
-            request = 'attach',
-            target = 'localhost:1234',
+            name = "Attach to gdbserver :1234",
+            type = "gdb",
+            request = "attach",
+            target = "localhost:1234",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
-            cwd = '${workspaceFolder}'
+            cwd = "${workspaceFolder}"
         }
     }
     dap.configurations.cpp = dap.configurations.c;
@@ -70,8 +70,8 @@ local function setup_config()
     -- Lua
     dap.configurations.lua = {
         {
-            type = 'nlua',
-            request = 'attach',
+            type = "nlua",
+            request = "attach",
             name = "Attach to running Neovim instance",
         }
     }
@@ -83,7 +83,7 @@ local function setup_config()
             type = "rust-gdb",
             request = "launch",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
             args = {}, -- provide arguments if needed
             cwd = "${workspaceFolder}",
@@ -94,10 +94,10 @@ local function setup_config()
             type = "rust-gdb",
             request = "attach",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
             pid = function()
-                local name = vim.fn.input('Executable name (filter): ')
+                local name = vim.fn.input("Executable name (filter): ")
                 return require("dap.utils").pick_process({ filter = name })
             end,
             cwd = "${workspaceFolder}"
@@ -108,9 +108,9 @@ local function setup_config()
             request = "attach",
             target = "localhost:1234",
             program = function()
-                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
             end,
-            cwd = '${workspaceFolder}'
+            cwd = "${workspaceFolder}"
         }
     }
 end
