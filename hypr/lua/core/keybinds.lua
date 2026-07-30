@@ -54,8 +54,8 @@ plugin.setup = function(config)
     hl.bind(secondMod .. " + j", hl.dsp.window.move({ direction = "down" }))
 
     hl.bind(secondMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
-    hl.bind(secondMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
-
+    hl.bind(secondMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+    hl.bind(secondMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
     hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area"))
     hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grimblast copy screen"))
@@ -79,8 +79,8 @@ plugin.setup = function(config)
     hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
     -- Move/resize windows with mainMod + LMB/RMB and dragging
-    hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-    hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+    --hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+    --hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
     -- Laptop multimedia keys for volume and LCD brightness
     hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
