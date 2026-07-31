@@ -39,7 +39,7 @@ local function cmake_tools_setup(config)
             type = "gdb",
             request = "launch",
             stopOnEntry = false,
-            runInTerminal = true,
+            runInTerminal = false,
         },
 
         cmake_executor = {

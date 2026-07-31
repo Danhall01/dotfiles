@@ -5,18 +5,27 @@ local function setup_adapters()
     local dap = require "dap"
 
     -- See: https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#c-c-rust-via-gdb
-    -- C / C++
+    -- C / C++ (No automatic flush stdout/stderr)
+    -- Workaround: Manually input; call ((void(*)(int))fflush)(0)
     dap.adapters.gdb = {
         type = "executable",
         command = "gdb",
-        args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+        args = {
+            "--interpreter=dap",
+            "--eval-command",
+            "set print pretty on",
+        },
     }
 
     -- Rust
     dap.adapters["rust-gdb"] = {
         type = "executable",
         command = "rust-gdb",
-        args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+        args = {
+            "--interpreter=dap",
+            "--eval-command",
+            "set print pretty on",
+        },
     }
 
     -- Lua
