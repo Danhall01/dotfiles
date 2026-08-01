@@ -2,17 +2,17 @@
 local dependencies = {}
 
 local function treesitter()
-    require('nvim-treesitter').setup {}
+	require("nvim-treesitter").setup({})
 end
 
 local function devicons()
-    require 'nvim-web-devicons'.setup {}
+	require("nvim-web-devicons").setup({})
 end
 
 ---@param config dh.plugins.config
 function dependencies.setup(config)
-    treesitter()
-    devicons()
+	treesitter()
+	devicons()
 end
 
 return dependencies

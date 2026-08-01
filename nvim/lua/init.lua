@@ -1,26 +1,26 @@
 -- Hooks
 ---@type dh.plugin_hooks
-require "plugin_hooks".setup()
+require("plugin_hooks").setup()
 
 -- pack.add
 ---@type dh.plugin_list
-require "plugin_list".setup()
+require("plugin_list").setup()
 
 -- Plugin Setup / Config
-require "plugins.init"
+require("plugins.init")
 
 -- LSP Configuration / Installation
-require "lsp.init"
+require("lsp.init")
 
 -- Commands & Automation
-require "commands.init"
-require "autocmd.init"
+require("commands.init")
+require("autocmd.init")
 
 -- UI
-require "ui.init"
+require("ui.init")
 
 -- My Plugins / Custom Setup
-require "modules.init"
+require("modules.init")
 
 -- Keymaps
-require "keymap.init"
+require("keymap.init")

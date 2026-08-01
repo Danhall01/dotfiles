@@ -1,5 +1,4 @@
 ---@class dh.lsp.servers.bashls
-local config = {
-}
+local config = {}
 
 return config
