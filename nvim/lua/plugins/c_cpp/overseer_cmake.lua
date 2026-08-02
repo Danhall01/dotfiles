@@ -4,21 +4,34 @@ local overseer_cmake = {}
 ---@param config dh.plugins.config
 local function camke_tools_usercmd(config)
 	local cmake = require("cmake-tools")
+	local overseer = require("overseer")
 
 	vim.api.nvim_create_user_command("CMakePerf", function()
-		cmake.run({ wrap_call = { "perf", "record", "--call-graph", "dwarf" } })
-	end, {})
-	vim.api.nvim_create_user_command("CMakePerfCurrent", function()
-		cmake.run_current_file({ wrap_call = { "perf", "record", "--call-graph", "dwarf" } })
+		local path = vim.fs.dirname(cmake.get_launch_target_path())
+		local args = unpack(cmake.get_launch_args())
+		args = args or ""
+
+		overseer
+			.new_task({
+				name = "Perf " .. cmake.get_launch_target(),
+				cmd = "perf record --call-graph dwarf " .. cmake.get_launch_target_path() .. args,
+				cwd = path,
+			})
+			:start()
 	end, {})
 
 	vim.api.nvim_create_user_command("CMakeValgrind", function()
-		cmake.run({ wrap_call = { "valgrind", "--leak-check=full" } })
-	end, {})
-	vim.api.nvim_create_user_command("CMakeValgrindCurrent", function()
-		cmake.run_current_file({
-			wrap_call = { "valgrind", "--leak-check=full" },
-		})
+		local path = vim.fs.dirname(cmake.get_launch_target_path())
+		local args = unpack(cmake.get_launch_args())
+		args = args or ""
+
+		overseer
+			.new_task({
+				name = "Valgrind " .. cmake.get_launch_target(),
+				cmd = "valgrind --leak-check=full " .. cmake.get_launch_target_path() .. args,
+				cwd = path,
+			})
+			:start()
 	end, {})
 end
 
