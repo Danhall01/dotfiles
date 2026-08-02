@@ -2,6 +2,27 @@
 local overseer_cmake = {}
 
 ---@param config dh.plugins.config
+local function camke_tools_usercmd(config)
+	local cmake = require("cmake-tools")
+
+	vim.api.nvim_create_user_command("CMakePerf", function()
+		cmake.run({ wrap_call = { "perf", "record", "--call-graph", "dwarf" } })
+	end, {})
+	vim.api.nvim_create_user_command("CMakePerfCurrent", function()
+		cmake.run_current_file({ wrap_call = { "perf", "record", "--call-graph", "dwarf" } })
+	end, {})
+
+	vim.api.nvim_create_user_command("CMakeValgrind", function()
+		cmake.run({ wrap_call = { "valgrind", "--leak-check=full" } })
+	end, {})
+	vim.api.nvim_create_user_command("CMakeValgrindCurrent", function()
+		cmake.run_current_file({
+			wrap_call = { "valgrind", "--leak-check=full" },
+		})
+	end, {})
+end
+
+---@param config dh.plugins.config
 local function cmake_tools_setup(config)
 	---@param task overseer.Task
 	local function on_cmake_task(task)
@@ -21,13 +42,37 @@ local function cmake_tools_setup(config)
 		})
 	end
 
+	local build_opts = {}
+	local generate_opts = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }
+	local system_threads = tonumber(vim.fn.system({ "nproc" }))
+
+	-- Multithread cmake
+	if system_threads ~= 0 then
+		vim.list_extend(build_opts, { string.format("-j%d", system_threads - 1) })
+	end
+
+	-- Prefer ninja over make
+	if vim.fn.executable("ninja") == 1 then
+		vim.list_extend(generate_opts, { "-G Ninja" })
+	end
+
+	-- Use Clang if available
+	if vim.fn.executable("clang") == 1 and vim.fn.executable("clang++") == 1 then
+		vim.fn.setenv("CC", "/usr/bin/clang")
+		vim.fn.setenv("CXX", "/usr/bin/clang++")
+	end
+
+	-- Use ccache if available
+	if vim.fn.executable("ccache") == 1 then
+		vim.fn.setenv("CMAKE_C_COMPILER_LAUNCHER", "ccache")
+		vim.fn.setenv("CMAKE_CXX_COMPILER_LAUNCHER", "ccache")
+	end
+
 	local osys = require("cmake-tools.osys")
 	require("cmake-tools").setup({
 		cmake_regenerate_on_save = false,
-		cmake_generate_options = {
-			"-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
-			"-DCMAKE_C_COMPILER=clang",
-		},
+		cmake_build_options = build_opts,
+		cmake_generate_options = generate_opts,
 		cmake_command = "cmake",
 		ctest_command = "ctest",
 
@@ -121,6 +166,7 @@ function overseer_cmake.setup(config)
 	toggleterm_setup(config)
 	overseer_setup(config.overseer)
 	cmake_tools_setup(config)
+	camke_tools_usercmd(config)
 end
 
 return overseer_cmake
