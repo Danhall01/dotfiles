@@ -5,7 +5,11 @@ local navigation = {}
 local function file_explorer(config)
 	-- Shortcut for default ex navigation
 	if not config.file_explorer.disabled then
-		vim.keymap.set("n", config.file_explorer.keybind, vim.cmd.Ex)
+		if require("oil") then
+			vim.keymap.set("n", config.file_explorer.keybind, "<CMD>Oil<CR>")
+		else
+			vim.keymap.set("n", config.file_explorer.keybind, vim.cmd.Ex)
+		end
 	end
 end
 

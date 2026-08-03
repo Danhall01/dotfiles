@@ -16,6 +16,14 @@ local config = {
 		open_on_debug_exit = true,
 		close_on_debug_enter = true,
 	},
+	oil = {
+		keybinds = require("keymap.config").navigation.oil,
+		auto_git = {
+			add = false,
+			mv = false,
+			rm = false,
+		},
+	},
 }
 
 return config

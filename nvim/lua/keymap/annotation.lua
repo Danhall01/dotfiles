@@ -28,11 +28,26 @@
 ---@field right dh.keymap.config.keybind
 ---@field number_prefix string
 
+---@class dh.keymap.config.navigation.oil
+---@field help dh.keymap.config.keybind
+---@field action dh.keymap.config.keybind
+---@field action_split_vert dh.keymap.config.keybind
+---@field action_split_hor dh.keymap.config.keybind
+---@field toggle_preview dh.keymap.config.keybind
+---@field close dh.keymap.config.keybind
+---@field refresh dh.keymap.config.keybind
+---@field dir_up dh.keymap.config.keybind
+---@field dir_cwd dh.keymap.config.keybind
+---@field open_external dh.keymap.config.keybind
+---@field toggle_hidden dh.keymap.config.keybind
+---@field toggle_trash dh.keymap.config.keybind
+
 ---@class dh.keymap.config.navigation
 ---@field file_explorer dh.keymap.config.keybind
 ---@field window dh.keymap.config.navigation.window
 ---@field auto_complete dh.keymap.config.navigation.auto_complete
 ---@field telescope dh.keymap.config.navigation.telescope
+---@field oil dh.keymap.config.navigation.oil
 
 ---@class dh.keymap.config.lsp
 ---@field next_error dh.keymap.config.keybind

@@ -4,7 +4,22 @@ vim.g.mapleader = " "
 ---@type dh.keymap.config
 local config = {
 	navigation = {
+		-- This is overwritten by Oil if it is installed on the system
 		file_explorer = { "<leader>nv" },
+		oil = {
+			action = { "<CR>" },
+			action_split_vert = { "C-s" },
+			action_split_hor = { "<C-h>" },
+			close = { "<C-c>" },
+			dir_cwd = { "_" },
+			dir_up = { "-" },
+			help = { "g?" },
+			open_external = { "gx" },
+			refresh = { "<C-r>" },
+			toggle_preview = { "<C-p>" },
+			toggle_hidden = { "g." },
+			toggle_trash = { "g\\" },
+		},
 		window = {
 			up = { "<Up>" },
 			down = { "<Down>" },
@@ -76,6 +91,20 @@ local keybinds = require("keymap.helper.keybind")
 local validation = {
 	navigation = {
 		file_explorer = keybinds.key,
+		oil = {
+			action = keybinds.key,
+			action_split_vert = keybinds.key,
+			action_split_hor = keybinds.key,
+			close = keybinds.key,
+			dir_cwd = keybinds.key,
+			dir_up = keybinds.key,
+			help = keybinds.key,
+			open_external = keybinds.key,
+			refresh = keybinds.key,
+			toggle_preview = keybinds.key,
+			toggle_hidden = keybinds.key,
+			toggle_trash = keybinds.key,
+		},
 		window = {
 			up = keybinds.key,
 			down = keybinds.key,

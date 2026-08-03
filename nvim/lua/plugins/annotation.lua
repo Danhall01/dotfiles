@@ -15,6 +15,16 @@
 ---@field open_on_debug_exit boolean Automatically open overseer when debugging session ends
 ---@field close_on_debug_enter boolean Automatically close overseer when debugging starts
 
+---@class dh.plugins.config.oil.auto_git
+---@field add boolean
+---@field rm boolean
+---@field mv boolean
+
+---@class dh.plugins.config.oil
+---@field keybinds dh.keymap.config.navigation.oil
+---@field auto_git dh.plugins.config.oil.auto_git
+
 ---@class dh.plugins.config
 ---@field blink_cmp dh.plugins.config.blink_cmp
 ---@field overseer dh.plugins.config.overseer
+---@field oil dh.plugins.config.oil

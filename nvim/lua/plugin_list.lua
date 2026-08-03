@@ -51,7 +51,7 @@ function plugins.setup()
 		--Navigation
 		{ src = github("nvim-telescope/telescope-fzf-native.nvim") }, --Required by telescope
 		{ src = github("nvim-telescope/telescope.nvim") },
-		--TODO{ src = github("stevearc/oil.nvim") },
+		{ src = github("stevearc/oil.nvim") },
 
 		-- UI / Style
 		{ src = github("SmiteshP/nvim-navic") }, --Required by lualine
