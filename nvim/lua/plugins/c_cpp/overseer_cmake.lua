@@ -28,7 +28,24 @@ local function camke_tools_usercmd(config)
 		overseer
 			.new_task({
 				name = "Valgrind " .. cmake.get_launch_target(),
-				cmd = "valgrind --leak-check=full " .. cmake.get_launch_target_path() .. args,
+				cmd = "valgrind --tool=memcheck --leak-check=full --xml=yes --xml-file=memcheck.xml "
+					.. cmake.get_launch_target_path()
+					.. args,
+				cwd = path,
+			})
+			:start()
+	end, {})
+	vim.api.nvim_create_user_command("CMakeHelgrind", function()
+		local path = vim.fs.dirname(cmake.get_launch_target_path())
+		local args = unpack(cmake.get_launch_args())
+		args = args or ""
+
+		overseer
+			.new_task({
+				name = "Helgrind " .. cmake.get_launch_target(),
+				cmd = "valgrind --tool=helgrind --xml=yes --xml-file=helgrid.xml "
+					.. cmake.get_launch_target_path()
+					.. args,
 				cwd = path,
 			})
 			:start()
