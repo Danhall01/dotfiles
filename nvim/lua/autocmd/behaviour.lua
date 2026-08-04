@@ -5,7 +5,7 @@ local function buffer_update()
 	vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
 		desc = "Reloads buffer on update",
 		pattern = { "*" },
-		group = "autocmd_behaviour",
+		group = "dh.autocmd.behaviour",
 		command = "if mode() != 'c' | checktime | endif",
 	})
 end
@@ -14,7 +14,7 @@ end
 local function auto_color_column(config)
 	vim.api.nvim_create_autocmd("InsertEnter", {
 		desc = "Enabled colorcolumn when using insert mode.",
-		group = "autocmd_behaviour",
+		group = "dh.autocmd.behaviour",
 		pattern = config.pattern,
 		callback = function()
 			vim.opt.colorcolumn = config.col
@@ -22,7 +22,7 @@ local function auto_color_column(config)
 	})
 	vim.api.nvim_create_autocmd("InsertLeave", {
 		desc = "Removes the colorcolumn when leaving insert mode.",
-		group = "autocmd_behaviour",
+		group = "dh.autocmd.behaviour",
 		pattern = config.pattern,
 		callback = function()
 			vim.opt.colorcolumn = ""
@@ -32,7 +32,7 @@ end
 
 ---@param config dh.autocmd.config
 function behaviour.setup(config)
-	vim.api.nvim_create_augroup("autocmd_behaviour", { clear = true })
+	vim.api.nvim_create_augroup("dh.autocmd.behaviour", { clear = true })
 	buffer_update()
 	auto_color_column(config.colorcolumn)
 end
