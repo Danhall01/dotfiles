@@ -47,7 +47,7 @@ local function log_all(config)
 	end
 
 	local task = overseer.new_task({
-		name = "Display old debugg records",
+		name = "Display old debug records",
 		cmd = "",
 		strategy = {
 			"orchestrator",
@@ -109,22 +109,34 @@ end
 ---@param config dh.plugins.config.overseer.debug_log
 local function register_user_commands(config)
 	local cwd = vim.fn.getcwd()
-	vim.api.nvim_create_user_command("OverseerCreateLogTask", function(argv)
+	vim.api.nvim_create_user_command("OverseerLogTask", function(argv)
 		local index = tonumber(argv.args)
-		if not index or index % 1 ~= 0 then
+		index = index or log_index - 1
+		if index <= 0 then
+			index = (log_index - 1) + index
+		end
+		if index > (log_index - 1) or index < 1 then
+			vim.notify(string.format("Only %d log file(s) exist in bin directory", log_index - 1), vim.log.levels.WARN)
 			return
 		end
-		local fname = cwd
-			.. "/"
-			.. config.path
-			.. config.log_name
-			.. get_current_date()
-			.. string.format("_%03d", log_index)
-			.. ".log"
+
+		-- Locate file with correct index
+		local content = vim.fn.glob(cwd .. "/" .. config.path .. "*", false, true)
+		local fname = nil
+		for _, file in pairs(content) do
+			if string.find(file, string.format("_%03d.log", index)) then
+				fname = file
+				break
+			end
+		end
+		if not fname then
+			return
+		end
+
 		overseer_cat_logfile(fname, index):start()
 	end, {
 		desc = "(ext) Runs a task to open the log file of given index in overseer",
-		nargs = 1,
+		nargs = "?",
 	})
 end
 
