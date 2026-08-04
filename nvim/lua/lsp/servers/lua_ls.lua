@@ -11,6 +11,9 @@ local config = {
 			end
 		end
 
+		-- Also assume current workspace (cwd) is a library
+		local path = client.workspace_folders and client.workspace_folders[1].name or vim.fn.getcwd()
+
 		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 			runtime = {
 				version = "LuaJIT",
@@ -22,7 +25,9 @@ local config = {
 			-- Make the server aware of Neovim runtime files
 			workspace = {
 				checkThirdParty = false,
+				useGitIgnore = true,
 				library = {
+					path,
 					vim.env.VIMRUNTIME,
 					-- For LSP Settings Type Annotations: https://github.com/neovim/nvim-lspconfig#lsp-settings-type-annotations
 					--vim.api.nvim_get_runtime_file("lua/lspconfig", false)[1],
