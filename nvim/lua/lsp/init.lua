@@ -1,7 +1,7 @@
 -- Load config files
 ---@type dh.lsp.config
 local config = require("lsp.config")
-vim.api.nvim_create_augroup("lsp", { clear = true })
+vim.api.nvim_create_augroup("dh.lsp", { clear = true })
 
 -- Install all requirements
 ---@type dh.lsp.installer

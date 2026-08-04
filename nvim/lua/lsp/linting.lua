@@ -12,6 +12,7 @@ end
 ---@param config dh.lsp.config
 local function auto_lint(config)
 	vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+		group = "dh.lsp",
 		callback = function()
 			lint.try_lint()
 		end,

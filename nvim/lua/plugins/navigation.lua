@@ -74,6 +74,7 @@ local function oil_setup(config)
 	-- Auto toggle preview
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "OilEnter",
+		group = "dh.plugins.navigation",
 		callback = vim.schedule_wrap(function(args)
 			if vim.api.nvim_get_current_buf() == args.data.buf and oil.get_cursor_entry() then
 				oil.open_preview({ split = "belowright" })
@@ -84,6 +85,7 @@ end
 
 ---@param config dh.plugins.config
 function navigation.setup(config)
+	vim.api.nvim_create_augroup("dh.plugins.navigation", { clear = true })
 	telescope(config)
 	telescope_fzf(config)
 

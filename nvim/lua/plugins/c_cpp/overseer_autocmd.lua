@@ -7,7 +7,7 @@ local dap = require("dap")
 local function open_on_enter(config)
 	vim.api.nvim_create_autocmd("BufEnter", {
 		pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
-		group = "dh.overseer",
+		group = "dh.plugins.c_cpp.overseer",
 		callback = function()
 			if not config.open_on_enter then
 				return
@@ -24,7 +24,7 @@ end
 local function close_on_leave(config)
 	vim.api.nvim_create_autocmd("BufLeave", {
 		pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
-		group = "dh.overseer",
+		group = "dh.plugins.c_cpp.overseer",
 		callback = function()
 			if not config.close_on_leave then
 				return
@@ -71,7 +71,7 @@ end
 
 ---@param config dh.plugins.config
 function overseer_autocmd.setup(config)
-	vim.api.nvim_create_augroup("dh.overseer", { clear = false })
+	vim.api.nvim_create_augroup("dh.plugins.c_cpp.overseer", { clear = false })
 	open_on_enter(config.overseer)
 	close_on_leave(config.overseer)
 	open_on_debug_exit(config.overseer)

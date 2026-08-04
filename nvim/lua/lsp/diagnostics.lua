@@ -19,7 +19,7 @@ end
 local function notify_on_errors(config)
 	vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 		desc = "Sends notifications of all warnings and errors upon writing to buffer",
-		group = "lsp",
+		group = "dh.lsp",
 		pattern = { "*" },
 		callback = function(_)
 			local messages = vim.diagnostic.get(nil, {
