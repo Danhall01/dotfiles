@@ -12,7 +12,7 @@ end
 function plugins.setup()
 	vim.pack.add({
 		-- Dependencies
-		{ src = github("nvim-tree/nvim-web-devicons") }, --Required by telescope && lualine && theme(s)
+		{ src = github("nvim-tree/nvim-web-devicons") }, --Required by telescope && oil && lualine && theme(s)
 		{ src = github("nvim-lua/plenary.nvim") }, --Required by telescope
 		{ src = github("nvim-treesitter/nvim-treesitter"), version = "main" }, --Required by nvim-dap-virtual-text && indent-blankline && noice
 		{ src = github("MunifTanjim/nui.nvim") }, --Required by noice
@@ -39,14 +39,14 @@ function plugins.setup()
 		{ src = github("rcarriga/nvim-dap-ui") },
 		{ src = github("theHamsta/nvim-dap-virtual-text") },
 
-		-- LSP-Build (C/C++)
-		{ src = github("akinsho/toggleterm.nvim"), version = "*" }, --Required by cmake-tools && overseer
-		{ src = github("stevearc/overseer.nvim") }, --Required by cmake-tools
-		{ src = github("Civitasv/cmake-tools.nvim") },
-
 		-- LSP-Misc
 		{ src = github("stevearc/conform.nvim") }, --Formatting
 		{ src = github("mfussenegger/nvim-lint") }, --Linting
+
+		-- C/C++
+		{ src = github("akinsho/toggleterm.nvim"), version = "*" }, --Required by cmake-tools && overseer
+		{ src = github("stevearc/overseer.nvim") }, --Required by cmake-tools
+		{ src = github("Civitasv/cmake-tools.nvim") },
 
 		--Navigation
 		{ src = github("nvim-telescope/telescope-fzf-native.nvim") }, --Required by telescope
