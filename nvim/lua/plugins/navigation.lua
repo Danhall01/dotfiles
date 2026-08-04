@@ -28,6 +28,9 @@ local function oil_setup(config)
 		view_options = {
 			show_hidden = true,
 		},
+		lsp_file_methods = {
+			enabled = true,
+		},
 		keymaps = {
 			[config.keybinds.help.keybind] = { "actions.show_help", mode = "n" },
 			[config.keybinds.action.keybind] = "actions.select",
