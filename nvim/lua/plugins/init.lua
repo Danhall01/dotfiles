@@ -10,6 +10,10 @@ require("plugins.typing").setup(config)
 ---@type dh.plugins.treesitter
 require("plugins.treesitter").setup(config)
 
+-- General Behaviour
+---@type dh.plugins.session
+require("plugins.session").setup(config)
+
 -- C/C++ config
 ---@type dh.plugins.c_cpp.overseer_cmake
 require("plugins.c_cpp.overseer_cmake").setup(config)

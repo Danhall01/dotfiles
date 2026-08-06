@@ -60,10 +60,10 @@ local function cmake_tools_setup(config)
 		if type(cmd) == "table" then
 			cmd = table.concat(cmd, " ")
 		end
-		if cmd:match("--build") or cmd:match("-B") then
+		if config.overseer.timeouts.build_events and (cmd:match("--build") or cmd:match("-B")) then
 			task:add_component({
 				"on_complete_dispose",
-				timeout = config.overseer.cmake_build_timeout,
+				timeout = config.overseer.timeouts.build_events,
 				statuses = { "SUCCESS", "CANCELED" },
 			})
 		end

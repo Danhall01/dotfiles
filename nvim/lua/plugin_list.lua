@@ -23,7 +23,7 @@ function plugins.setup()
 		{ src = github("rafamadriz/friendly-snippets") }, --Required by blink.cmp
 		{ src = github("saghen/blink.lib") }, --Required by blink.cmp
 		{ src = github("saghen/blink.cmp") }, --Required by nvim-lspconfig (Core Module)
-		{ src = github("windwp/nvim-autopairs") }, -- MAYBE_UNUSED
+		{ src = github("windwp/nvim-autopairs") },
 
 		-- LSP
 		{ src = github("neovim/nvim-lspconfig") }, --Required by mason-lspconfig (Core Module)
@@ -43,6 +43,9 @@ function plugins.setup()
 		{ src = github("stevearc/conform.nvim") }, --Formatting
 		{ src = github("mfussenegger/nvim-lint") }, --Linting
 
+		-- General behaviour
+		{ src = github("stevearc/resession.nvim") }, --Sessions
+
 		-- C/C++
 		{ src = github("akinsho/toggleterm.nvim"), version = "*" }, --Required by cmake-tools && overseer
 		{ src = github("stevearc/overseer.nvim") }, --Required by cmake-tools
@@ -54,8 +57,8 @@ function plugins.setup()
 		{ src = github("stevearc/oil.nvim") },
 
 		-- UI / Style
-		{ src = github("SmiteshP/nvim-navic") }, --Required by lualine
-		{ src = github("bwpge/lualine-pretty-path") }, --Required by lualine
+		{ src = github("SmiteshP/nvim-navic") }, --Required by lualine (Extended lsp path)
+		{ src = github("bwpge/lualine-pretty-path") }, --Required by lualine (Pretty filepath)
 		{ src = github("nvim-lualine/lualine.nvim") },
 		{ src = github("rcarriga/nvim-notify") }, --Required by noice
 		{ src = github("folke/noice.nvim") },

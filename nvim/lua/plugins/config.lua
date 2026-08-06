@@ -7,10 +7,14 @@ local config = {
 		keybinds = require("keymap.config").overseer,
 		debug_log = {
 			enabled = true,
+			display_all_on_enter = true,
 			path = "bin/",
 			log_name = "dap",
 		},
-		cmake_build_timeout = 3,
+		timeouts = {
+			build_events = 3,
+			log_events = 10,
+		},
 		open_on_enter = true,
 		close_on_leave = false,
 		open_on_debug_exit = true,
@@ -22,6 +26,15 @@ local config = {
 			add = false,
 			mv = false,
 			rm = false,
+		},
+	},
+	session = {
+		save_on_exit = true,
+		load_on_enter = true,
+		auto_save = {
+			enabled = false,
+			interval = 300,
+			notify = true,
 		},
 	},
 }
