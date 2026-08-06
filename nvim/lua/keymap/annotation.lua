@@ -49,6 +49,10 @@
 ---@field telescope dh.keymap.config.navigation.telescope
 ---@field oil dh.keymap.config.navigation.oil
 
+---@class dh.keymap.config.motions
+---@field next_function dh.keymap.config.keybind
+---@field prev_function dh.keymap.config.keybind
+
 ---@class dh.keymap.config.lsp
 ---@field next_error dh.keymap.config.keybind
 ---@field prev_error dh.keymap.config.keybind
@@ -88,6 +92,7 @@
 
 ---@class dh.keymap.config
 ---@field navigation dh.keymap.config.navigation
+---@field motions dh.keymap.config.motions
 ---@field lsp dh.keymap.config.lsp
 ---@field debug dh.keymap.config.debug
 ---@field cmake dh.keymap.config.cmake

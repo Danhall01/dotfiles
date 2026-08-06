@@ -47,6 +47,10 @@ local config = {
 			grep_selected = { "<leader>ns" },
 		},
 	},
+	motions = {
+		next_function = { "<C-j>" },
+		prev_function = { "<C-k>" },
+	},
 	lsp = {
 		find_references = { "F", disabled = true },
 		goto_definition = { "D", disabled = true },
@@ -54,8 +58,8 @@ local config = {
 		goto_declaration = { "<leader>gd" },
 		goto_implementation = { "I" },
 		hover_info = { "K" },
-		next_error = { "<C-j>" },
-		prev_error = { "<C-k>" },
+		next_error = { "<C-j>", disabled = true },
+		prev_error = { "<C-k>", disabled = true },
 		rename = { "<F2>" },
 		code_action = { "<leader>ca" },
 		toggle_header = { "<leader>cc" },
@@ -130,6 +134,10 @@ local validation = {
 			grep_live = keybinds.key,
 			grep_selected = keybinds.key,
 		},
+	},
+	motions = {
+		next_function = keybinds.key,
+		prev_function = keybinds.key,
 	},
 	lsp = {
 		find_references = keybinds.key,

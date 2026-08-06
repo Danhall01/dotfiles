@@ -1,4 +1,4 @@
----@class dh.module.nvim_settings
+---@class dh.modules.nvim_settings
 local settings = {}
 
 local function editor_style()
@@ -49,7 +49,7 @@ local function shader_filetype_ext()
 	})
 end
 
----@param config dh.module.config
+---@param config dh.modules.config
 function settings.setup(config)
 	editor_style()
 	behaviour()

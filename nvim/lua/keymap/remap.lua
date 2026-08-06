@@ -21,11 +21,23 @@ local function copy_to_clipboard()
 	vim.keymap.set("v", "<leader>y", '"+y')
 end
 
+---@param config dh.keymap.config.motions
+local function motions(config)
+	if not config.next_function.disabled then
+		vim.keymap.set("n", config.next_function.keybind, "]]")
+	end
+	if not config.prev_function.disabled then
+		vim.keymap.set("n", config.prev_function.keybind, "[[")
+	end
+end
+
 ---@param config dh.keymap.config
 function remap.setup(config)
 	improved_insert_mode()
 	delete_to_void()
 	copy_to_clipboard()
+
+	motions(config.motions)
 end
 
 return remap

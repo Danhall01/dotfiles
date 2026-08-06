@@ -31,6 +31,7 @@ function plugins.setup()
 		{ src = github("mason-org/mason-lspconfig.nvim") }, --Required by mason-tool-installer
 		{ src = github("jay-babu/mason-nvim-dap.nvim") }, --Required by mason-tool-installer
 		{ src = github("WhoIsSethDaniel/mason-tool-installer.nvim") },
+		{ src = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
 
 		-- LSP-Debug
 		{ src = github("jbyuki/one-small-step-for-vimkind") }, --Required by nvim-dap (LUA adapter)

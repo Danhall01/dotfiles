@@ -8,6 +8,10 @@
       "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
       "src": "https://github.com/saghen/blink.lib"
     },
+    "clangd_extensions.nvim": {
+      "rev": "997d20e6bc83ea1a6223c08d2b9db76943abf56b",
+      "src": "https://git.sr.ht/~p00f/clangd_extensions.nvim"
+    },
     "cmake-tools.nvim": {
       "rev": "22859d754b5de738cfe9945e0910729f63deefd0",
       "src": "https://github.com/Civitasv/cmake-tools.nvim"
