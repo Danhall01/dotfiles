@@ -39,7 +39,7 @@ local function resession_setup(config)
 			callback = function()
 				if vim.fn.argc(-1) == 0 then
 					vim.schedule(function()
-						vim.notify(string.format("Loading session: %s", get_session_name()))
+						vim.notify(string.format("Loading session: %s", get_session_name()), vim.log.levels.TRACE)
 					end)
 					resession.load(get_session_name(), { dir = "dirsession", silence_errors = true })
 				end
