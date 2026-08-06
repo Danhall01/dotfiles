@@ -26,11 +26,11 @@ local function overseer_cat_logfile(file, session_index)
 	return task
 end
 
----@param config dh.plugins.config.overseer.debug_log
-local function orchestrator_display_all(config)
+---@param path string The path to the log files
+local function orchestrator_display_all(path)
 	local overseer = require("overseer")
 	local cwd = vim.fn.getcwd()
-	local content = vim.fn.glob(cwd .. "/" .. config.path .. "*", false, true)
+	local content = vim.fn.glob(cwd .. "/" .. path .. "*", false, true)
 	table.sort(content, function(s1, s2)
 		return s1:match("_(%d+)%.log") > s2:match("_(%d+)%.log")
 	end)
@@ -149,7 +149,11 @@ end
 ---@param config dh.plugins.config.overseer.debug_log
 local function register_user_commands(config)
 	local cwd = vim.fn.getcwd()
-	vim.api.nvim_create_user_command("OverseerLogTask", function(argv)
+	vim.api.nvim_create_user_command("DisplayLog", function(argv)
+		if argv.args == "." or argv.args == "*" then
+			orchestrator_display_all(config.path):start()
+			return
+		end
 		local index = tonumber(argv.args)
 		index = index or g_log_index - 1
 		if index <= 0 then
@@ -192,7 +196,7 @@ function overseer_dap.setup(config)
 		update_counter(config.overseer.debug_log)
 		if config.overseer.debug_log.display_all_on_enter then
 			vim.schedule(function()
-				orchestrator_display_all(config.overseer.debug_log):start()
+				orchestrator_display_all(config.overseer.debug_log.path):start()
 			end)
 		end
 		attach_log_task(config.overseer.debug_log)
