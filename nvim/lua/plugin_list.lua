@@ -4,73 +4,143 @@
 ---@class dh.plugin_list
 local plugins = {}
 
--- Shorthand helpers
+---@type dh.neoplug
+local neoplug = require("neoplug")
+
+--- Shorthand helper
+---@param plugin string The name of the plugin path
 local function github(plugin)
 	return "https://github.com/" .. plugin
 end
 
-function plugins.setup()
-	vim.pack.add({
-		-- Dependencies
-		{ src = github("nvim-tree/nvim-web-devicons") }, --Required by telescope && oil && lualine && theme(s)
-		{ src = github("nvim-lua/plenary.nvim") }, --Required by telescope
-		{ src = github("nvim-treesitter/nvim-treesitter"), version = "main" }, --Required by nvim-dap-virtual-text && indent-blankline && noice
-		{ src = github("MunifTanjim/nui.nvim") }, --Required by noice
-
-		-- Typing
-		{ src = github("folke/lazydev.nvim") }, --Required by blink.cmp && nvim-dap-ui
-		{ src = github("xzbdmw/colorful-menu.nvim") }, --Required by blink.cmp
-		{ src = github("rafamadriz/friendly-snippets") }, --Required by blink.cmp
-		{ src = github("saghen/blink.lib") }, --Required by blink.cmp
-		{ src = github("saghen/blink.cmp") }, --Required by nvim-lspconfig (Core Module)
-		{ src = github("windwp/nvim-autopairs") },
-
-		-- LSP
-		{ src = github("neovim/nvim-lspconfig") }, --Required by mason-lspconfig (Core Module)
-		{ src = github("mason-org/mason.nvim") }, --Required by mason-tool-installer
-		{ src = github("mason-org/mason-lspconfig.nvim") }, --Required by mason-tool-installer
-		{ src = github("jay-babu/mason-nvim-dap.nvim") }, --Required by mason-tool-installer
-		{ src = github("WhoIsSethDaniel/mason-tool-installer.nvim") },
-		{ src = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
-
-		-- LSP-Debug
-		{ src = github("jbyuki/one-small-step-for-vimkind") }, --Required by nvim-dap (LUA adapter)
-		{ src = github("mfussenegger/nvim-dap") }, --Required by nvim-dap-ui && nvim-dap-virtual-text (Core Module)
-		{ src = github("nvim-neotest/nvim-nio") }, --Required by nvim-dap-ui
-		{ src = github("rcarriga/nvim-dap-ui") },
-		{ src = github("theHamsta/nvim-dap-virtual-text") },
-
-		-- LSP-Misc
-		{ src = github("stevearc/conform.nvim") }, --Formatting
-		{ src = github("mfussenegger/nvim-lint") }, --Linting
-
-		-- General behaviour
-		{ src = github("stevearc/resession.nvim") }, --Sessions
-
-		-- C/C++
-		{ src = github("akinsho/toggleterm.nvim"), version = "*" }, --Required by cmake-tools && overseer
-		{ src = github("stevearc/overseer.nvim") }, --Required by cmake-tools
-		{ src = github("Civitasv/cmake-tools.nvim") },
-
-		--Navigation
-		{ src = github("nvim-telescope/telescope-fzf-native.nvim") }, --Required by telescope
-		{ src = github("nvim-telescope/telescope.nvim") },
-		{ src = github("stevearc/oil.nvim") },
-
-		-- UI / Style
-		{ src = github("SmiteshP/nvim-navic") }, --Required by lualine (Extended lsp path)
-		{ src = github("bwpge/lualine-pretty-path") }, --Required by lualine (Pretty filepath)
-		{ src = github("nvim-lualine/lualine.nvim") },
-		{ src = github("rcarriga/nvim-notify") }, --Required by noice
-		{ src = github("folke/noice.nvim") },
-		{ src = github("catgoose/nvim-colorizer.lua") },
-		{ src = github("lukas-reineke/indent-blankline.nvim") },
-		{ src = github("nvim-treesitter/nvim-treesitter-context") },
-
-		-- Themes
-		{ src = github("olivercederborg/poimandres.nvim") },
-		{ src = github("projekt0n/github-nvim-theme") },
+local function plug_typing()
+	neoplug:add({
+		github("saghen/blink.cmp"),
+		dependencies = {
+			github("saghen/blink.lib"),
+			github("rafamadriz/friendly-snippets"),
+			github("xzbdmw/colorful-menu.nvim"),
+			github("folke/lazydev.nvim"),
+		},
 	})
+	neoplug:add(github("windwp/nvim-autopairs"))
+end
+
+local function plug_navigation()
+	neoplug:add({
+		github("nvim-telescope/telescope.nvim"),
+		dependencies = {
+			github("nvim-tree/nvim-web-devicons"),
+			github("nvim-lua/plenary.nvim"),
+			github("nvim-telescope/telescope-fzf-native.nvim"),
+		},
+	})
+	neoplug:add({
+		github("stevearc/oil.nvim"),
+		dependencies = {
+			github("nvim-tree/nvim-web-devicons"),
+		},
+	})
+end
+
+local function plug_LSP()
+	neoplug:add({
+		github("neovim/nvim-lspconfig"),
+		dependencies = {
+			github("saghen/blink.cmp"),
+		},
+	})
+	neoplug:add({
+		github("WhoIsSethDaniel/mason-tool-installer.nvim"),
+		dependencies = {
+			github("mason-org/mason.nvim"),
+			{ github("mason-org/mason-lspconfig.nvim"), dependencies = github("neovim/nvim-lspconfig") },
+			github("jay-babu/mason-nvim-dap.nvim"),
+		},
+	})
+	neoplug:add("https://git.sr.ht/~p00f/clangd_extensions.nvim")
+
+	neoplug:add(github("stevearc/conform.nvim"))
+	neoplug:add(github("mfussenegger/nvim-lint"))
+end
+
+local function plug_debug()
+	neoplug:add({
+		github("mfussenegger/nvim-dap"),
+		dependencies = {
+			github("jbyuki/one-small-step-for-vimkind"),
+		},
+	})
+	neoplug:add({
+		github("rcarriga/nvim-dap-ui"),
+		dependencies = {
+			github("mfussenegger/nvim-dap"),
+			github("nvim-neotest/nvim-nio"),
+			github("folke/lazydev.nvim"),
+		},
+	})
+	neoplug:add({
+		github("theHamsta/nvim-dap-virtual-text"),
+		dependencies = {
+			github("mfussenegger/nvim-dap"),
+			{ github("nvim-treesitter/nvim-treesitter"), version = "main" },
+		},
+	})
+end
+
+local function plug_behaviour()
+	neoplug:add({
+		github("stevearc/resession.nvim"),
+		dependencies = github("stevearc/overseer.nvim"),
+	})
+end
+
+local function plug_ui()
+	neoplug:add({
+		github("nvim-lualine/lualine.nvim"),
+		dependencies = {
+			github("nvim-tree/nvim-web-devicons"),
+			github("SmiteshP/nvim-navic"), -- Extended lsp path
+			github("bwpge/lualine-pretty-path"), -- Pretty filepath
+		},
+	})
+	neoplug:add({
+		github("folke/noice.nvim"),
+		dependencies = {
+			github("nvim-treesitter/nvim-treesitter"),
+			github("MunifTanjim/nui.nvim"),
+			github("rcarriga/nvim-notify"),
+		},
+	})
+
+	neoplug:add(github("catgoose/nvim-colorizer.lua"))
+	neoplug:add(github("lukas-reineke/indent-blankline.nvim"))
+	neoplug:add(github("nvim-treesitter/nvim-treesitter-context"))
+
+	-- Themes
+	neoplug:add(github("olivercederborg/poimandres.nvim"))
+	neoplug:add(github("projekt0n/github-nvim-theme"))
+end
+
+local function plug_cpp()
+	neoplug:add({
+		github("Civitasv/cmake-tools.nvim"),
+		dependencies = {
+			{ github("akinsho/toggleterm.nvim"), version = "*" },
+			{ github("stevearc/overseer.nvim"), dependencies = github("akinsho/toggleterm.nvim") },
+		},
+	})
+end
+
+function plugins.setup()
+	plug_typing()
+	plug_navigation()
+	plug_LSP()
+	plug_debug()
+	plug_behaviour()
+	plug_ui()
+	plug_cpp()
+	neoplug:submit()
 end
 
 return plugins
