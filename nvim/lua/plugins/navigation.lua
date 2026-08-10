@@ -22,6 +22,13 @@ end
 
 ---@param config dh.plugins.config.oil
 local function oil_setup(config)
+	local preview_opts = { vertical = true, split = "belowright" }
+	local preview_callback = function(err)
+		if not err then
+			vim.api.nvim_command("vertical resize 50")
+		end
+	end
+
 	local oil = require("oil")
 	oil.setup({
 		watch_for_changes = true,
@@ -36,10 +43,11 @@ local function oil_setup(config)
 			[config.keybinds.action.keybind] = "actions.select",
 			[config.keybinds.action_split_vert.keybind] = {
 				"actions.select",
-				opts = { vertical = true, split = "belowright" },
+				opts = preview_opts,
+				callback = preview_callback,
 			},
 			[config.keybinds.action_split_hor.keybind] = { "actions.select", opts = { horizontal = true } },
-			[config.keybinds.toggle_preview.keybind] = { "actions.preview", opts = { split = "belowright" } },
+			[config.keybinds.toggle_preview.keybind] = { "actions.preview", opts = preview_opts },
 			[config.keybinds.close.keybind] = { "actions.close", mode = "n" },
 			[config.keybinds.refresh.keybind] = "actions.refresh",
 			[config.keybinds.dir_up.keybind] = { "actions.parent", mode = "n" },
@@ -77,7 +85,7 @@ local function oil_setup(config)
 		group = "dh.plugins.navigation",
 		callback = vim.schedule_wrap(function(args)
 			if vim.api.nvim_get_current_buf() == args.data.buf and oil.get_cursor_entry() then
-				oil.open_preview({ split = "belowright" })
+				oil.open_preview(preview_opts, preview_callback)
 			end
 		end),
 	})
