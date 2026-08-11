@@ -14,10 +14,5 @@ require("plugins.treesitter").setup(config)
 ---@type dh.plugins.session
 require("plugins.session").setup(config)
 
--- C/C++ config
----@type dh.plugins.c_cpp.overseer_cmake
-require("plugins.c_cpp.overseer_cmake").setup(config)
----@type dh.plugins.c_cpp.overseer_dap
-require("plugins.c_cpp.overseer_dap").setup(config)
----@type dh.plugins.c_cpp.overseer_autocmd
-require("plugins.c_cpp.overseer_autocmd").setup(config)
+-- Task manager
+require("plugins.tasks.init")

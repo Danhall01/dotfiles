@@ -1,13 +1,13 @@
----@class dh.plugins.c_cpp.overseer_autocmd
-local overseer_autocmd = {}
+---@class dh.plugins.tasks.autocmd
+local task_autocmd = {}
 local overseer = require("overseer")
 local dap = require("dap")
 
----@param config dh.plugins.config.overseer
+---@param config dh.plugins.tasks.config.overseer
 local function open_on_enter(config)
 	vim.api.nvim_create_autocmd("BufEnter", {
 		pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
-		group = "dh.plugins.c_cpp.overseer",
+		group = "dh.plugins.tasks.autocmd",
 		callback = function()
 			if not config.open_on_enter then
 				return
@@ -20,11 +20,11 @@ local function open_on_enter(config)
 	})
 end
 
----@param config dh.plugins.config.overseer
+---@param config dh.plugins.tasks.config.overseer
 local function close_on_leave(config)
 	vim.api.nvim_create_autocmd("BufLeave", {
 		pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
-		group = "dh.plugins.c_cpp.overseer",
+		group = "dh.plugins.tasks.autocmd",
 		callback = function()
 			if not config.close_on_leave then
 				return
@@ -37,7 +37,7 @@ local function close_on_leave(config)
 	})
 end
 
----@param config dh.plugins.config.overseer
+---@param config dh.plugins.tasks.config.overseer
 local function open_on_debug_exit(config)
 	dap.listeners.before.event_terminated.overseer_config = function()
 		if not config.open_on_debug_exit then
@@ -53,7 +53,7 @@ local function open_on_debug_exit(config)
 	end
 end
 
----@param config dh.plugins.config.overseer
+---@param config dh.plugins.tasks.config.overseer
 local function close_on_debug_enter(config)
 	dap.listeners.before.attach.overseer_config = function()
 		if not config.close_on_debug_enter then
@@ -69,13 +69,13 @@ local function close_on_debug_enter(config)
 	end
 end
 
----@param config dh.plugins.config
-function overseer_autocmd.setup(config)
-	vim.api.nvim_create_augroup("dh.plugins.c_cpp.overseer", { clear = false })
+---@param config dh.plugins.tasks.config
+function task_autocmd.setup(config)
+	vim.api.nvim_create_augroup("dh.plugins.tasks.autocmd", { clear = false })
 	open_on_enter(config.overseer)
 	close_on_leave(config.overseer)
 	open_on_debug_exit(config.overseer)
 	close_on_debug_enter(config.overseer)
 end
 
-return overseer_autocmd
+return task_autocmd

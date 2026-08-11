@@ -1,7 +1,8 @@
----@class dh.plugins.c_cpp.overseer_cmake
-local overseer_cmake = {}
+---@class dh.plugins.tasks.cmake
+local task_cmake = {}
+local g_task_view = {}
 
----@param config dh.plugins.config
+---@param config dh.plugins.tasks.config
 local function camke_tools_usercmd(config)
 	local cmake = require("cmake-tools")
 	local overseer = require("overseer")
@@ -52,8 +53,20 @@ local function camke_tools_usercmd(config)
 	end, {})
 end
 
----@param config dh.plugins.config
+---@param config dh.plugins.tasks.config
 local function cmake_tools_setup(config)
+	if config.overseer.timeouts.destroy_on_exit then
+		vim.api.nvim_create_autocmd("ExitPre", {
+			group = "dh.plugins.tasks.cmake",
+			callback = function()
+				for _, task in ipairs(g_task_view) do
+					if not task:is_disposed() then
+						task:dispose(true)
+					end
+				end
+			end,
+		})
+	end
 	---@param task overseer.Task
 	local function on_cmake_task(task)
 		local cmd = task.cmd
@@ -67,6 +80,7 @@ local function cmake_tools_setup(config)
 				statuses = { "SUCCESS", "CANCELED" },
 			})
 		end
+		table.insert(g_task_view, task)
 		require("overseer").open({
 			enter = false,
 		})
@@ -144,59 +158,11 @@ local function cmake_tools_setup(config)
 	})
 end
 
----@param config dh.plugins.config.overseer
-local function overseer_setup(config)
-	local overseer = require("overseer")
-	overseer.setup({
-		dap = true,
-		output = {
-			use_terminal = true,
-			preserve_output = true,
-		},
-
-		component_aliases = {
-			default = {
-				"on_exit_set_status",
-				--"on_complete_notify",
-				--{ "on_complete_dispose", require_view = { "SUCCESS", "FAILURE" } },
-			},
-		},
-
-		-- Configure task list
-		task_list = {
-			direction = "bottom",
-			max_height = 0.3,
-			min_height = 0.1,
-			keymaps = {
-				[config.keybinds.actions.keybind] = "keymap.run_action",
-				[config.keybinds.open_float.keybind] = {
-					"keymap.open",
-					opts = { dir = "float" },
-					desc = "Open task output in float",
-				},
-			},
-		},
-
-		-- Configure task floating output window
-		task_win = {
-			padding = 3,
-		},
-	})
-end
-
----@param config dh.plugins.config
-local function toggleterm_setup(config)
-	require("toggleterm").setup({
-		size = 20,
-	})
-end
-
----@param config dh.plugins.config
-function overseer_cmake.setup(config)
-	toggleterm_setup(config)
-	overseer_setup(config.overseer)
+---@param config dh.plugins.tasks.config
+function task_cmake.setup(config)
+	vim.api.nvim_create_augroup("dh.plugins.tasks.cmake", {})
 	cmake_tools_setup(config)
 	camke_tools_usercmd(config)
 end
 
-return overseer_cmake
+return task_cmake

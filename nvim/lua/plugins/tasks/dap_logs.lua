@@ -1,5 +1,5 @@
----@class dh.plugins.c_cpp.overseer_dap
-local overseer_dap = {}
+---@class dh.plugins.tasks.dap_logs
+local dap_logs = {}
 local g_dap_logfile = nil
 local g_log_index = 1
 
@@ -61,7 +61,7 @@ local function orchestrator_display_all(path)
 	return task
 end
 
----@param config dh.plugins.config.overseer
+---@param config dh.plugins.tasks.config.overseer
 local function setup_components(config)
 	if not config.timeouts.log_events then
 		return
@@ -74,8 +74,11 @@ local function setup_components(config)
 			},
 		})
 	end
+	if not config.timeouts.destroy_on_exit and not config.timeouts.log_events == "exit" then
+		return
+	end
 	vim.api.nvim_create_autocmd("ExitPre", {
-		group = "dh.plugins.c_cpp.overseer_dap",
+		group = "dh.plugins.tasks.dap_logs",
 		callback = function()
 			for _, task in ipairs(g_task_view) do
 				if not task:is_disposed() then
@@ -86,7 +89,7 @@ local function setup_components(config)
 	})
 end
 
----@param config dh.plugins.config.overseer.debug_log
+---@param config dh.plugins.tasks.config.overseer.debug_log
 local function update_counter(config)
 	local cwd = vim.fn.getcwd()
 	local content = vim.fn.glob(cwd .. "/" .. config.path .. "*", false, true)
@@ -96,7 +99,7 @@ local function update_counter(config)
 	g_log_index = #content + 1
 end
 
----@param config dh.plugins.config.overseer.debug_log
+---@param config dh.plugins.tasks.config.overseer.debug_log
 local function attach_log_task(config)
 	local function create_logview_task()
 		if not g_dap_logfile then
@@ -146,7 +149,7 @@ local function attach_log_task(config)
 	dap.listeners.after.event_exited["overseer-debug-output"] = create_logview_task
 end
 
----@param config dh.plugins.config.overseer.debug_log
+---@param config dh.plugins.tasks.config.overseer.debug_log
 local function register_user_commands(config)
 	local cwd = vim.fn.getcwd()
 	vim.api.nvim_create_user_command("DisplayLog", function(argv)
@@ -187,9 +190,9 @@ local function register_user_commands(config)
 	})
 end
 
----@param config dh.plugins.config
-function overseer_dap.setup(config)
-	vim.api.nvim_create_augroup("dh.plugins.c_cpp.overseer_dap", {})
+---@param config dh.plugins.tasks.config
+function dap_logs.setup(config)
+	vim.api.nvim_create_augroup("dh.plugins.tasks.dap_logs", {})
 
 	if config.overseer.debug_log.enabled then
 		setup_components(config.overseer)
@@ -204,4 +207,4 @@ function overseer_dap.setup(config)
 	end
 end
 
-return overseer_dap
+return dap_logs

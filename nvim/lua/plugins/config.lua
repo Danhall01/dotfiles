@@ -1,27 +1,13 @@
+---@type dh.keymap.config
+local keybinds = require("keymap.config")
+
 ---@type dh.plugins.config
 local config = {
 	blink_cmp = {
-		keybinds = require("keymap.config").navigation.auto_complete,
-	},
-	overseer = {
-		keybinds = require("keymap.config").overseer,
-		debug_log = {
-			enabled = true,
-			display_all_on_enter = true,
-			path = "bin/",
-			log_name = "dap",
-		},
-		timeouts = {
-			build_events = 3,
-			log_events = 10,
-		},
-		open_on_enter = true,
-		close_on_leave = false,
-		open_on_debug_exit = true,
-		close_on_debug_enter = true,
+		keybinds = keybinds.navigation.auto_complete,
 	},
 	oil = {
-		keybinds = require("keymap.config").navigation.oil,
+		keybinds = keybinds.navigation.oil,
 		auto_git = {
 			add = false,
 			mv = false,
