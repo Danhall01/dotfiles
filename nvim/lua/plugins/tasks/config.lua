@@ -22,13 +22,28 @@ local config = {
 		close_on_debug_enter = true,
 	},
 
-	runners_by_ft = {
-		c = "CMakeRun",
-		cpp = "CMakeRun",
-	},
-	debugger_by_ft = {
-		c = "CMakeDebug",
-		cpp = "CMakeDebug",
+	runners = {
+		keybinds = keybinds.tasks,
+		runners_by_ft = {
+			c = "CMakeRun",
+			cpp = "CMakeRun",
+		},
+		builder_by_ft = {
+			c = "CMakeBuild",
+			cpp = "CMakeBuild",
+		},
+		builder_config_by_ft = {
+			c = "CMakeSelectBuildType",
+			cpp = "CMakeSelectBuildType",
+		},
+		debugger_by_ft = {
+			c = "CMakeDebug",
+			cpp = "CMakeDebug",
+		},
+		debugger_current_by_ft = {
+			c = "CMakeDebugCurrentFile",
+			cpp = "CMakeDebugCurrentFile",
+		},
 	},
 }
 

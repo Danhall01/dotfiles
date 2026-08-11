@@ -7,8 +7,6 @@ require("keymap.navigation").setup(config)
 require("keymap.lsp").setup(config)
 ---@type dh.keymap.debug
 require("keymap.debug").setup(config)
----@type dh.keymap.cmake
-require("keymap.cmake").setup(config)
 
 ---@type dh.keymap.remap
 require("keymap.remap").setup(config)

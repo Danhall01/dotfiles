@@ -18,7 +18,14 @@
 ---@field open_on_debug_exit boolean Automatically open overseer when debugging session ends
 ---@field close_on_debug_enter boolean Automatically close overseer when debugging starts
 
+---@class dh.plugins.tasks.config.runners
+---@field keybinds dh.keymap.config.tasks
+---@field runners_by_ft table<string, string|table<string>|function>
+---@field builder_by_ft table<string, string|table<string>|function>
+---@field builder_config_by_ft table<string, string|table<string>|function>
+---@field debugger_by_ft table<string, string|table<string>|function>
+---@field debugger_current_by_ft table<string, string|table<string>|function>
+
 ---@class dh.plugins.tasks.config
 ---@field overseer dh.plugins.tasks.config.overseer
----@field runners_by_ft table<string, string|function>
----@field debugger_by_ft table<string, string|function>
+---@field runners dh.plugins.tasks.config.runners

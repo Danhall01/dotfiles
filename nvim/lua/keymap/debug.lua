@@ -2,60 +2,6 @@
 local debug = {}
 
 ---@param config dh.keymap.config.debug
-local function runner(config)
-	local debug_commands = {
-		c = function()
-			vim.cmd("CMakeDebug")
-		end,
-		cpp = function()
-			vim.cmd("CMakeDebug")
-		end,
-		lua = nil,
-	}
-	if not config.run.disabled then
-		vim.keymap.set("n", config.run.keybind, function()
-			local cmd = debug_commands[vim.bo.filetype]
-			if cmd then
-				vim.notify("Debug session started for filetype: " .. tostring(vim.bo.filetype), vim.log.levels.INFO)
-				cmd()
-			else
-				vim.notify(
-					"No debug runner configured for filetype: " .. tostring(vim.bo.filetype),
-					vim.log.levels.ERROR
-				)
-			end
-		end, { desc = "Start debugger from selected file" })
-	end
-end
-
----@param config dh.keymap.config.debug
-local function runner_current(config)
-	local debug_commands = {
-		c = function()
-			vim.cmd("CMakeDebugCurrentFile")
-		end,
-		cpp = function()
-			vim.cmd("CMakeDebugCurrentFile")
-		end,
-		lua = nil,
-	}
-	if not config.run_current.disabled then
-		vim.keymap.set("n", config.run_current.keybind, function()
-			local cmd = debug_commands[vim.bo.filetype]
-			if cmd then
-				vim.notify("Debug session started for filetype: " .. tostring(vim.bo.filetype), vim.log.levels.INFO)
-				cmd()
-			else
-				vim.notify(
-					"No debug runner configured for filetype: " .. tostring(vim.bo.filetype),
-					vim.log.levels.ERROR
-				)
-			end
-		end, { desc = "Start debugger from current file" })
-	end
-end
-
----@param config dh.keymap.config.debug
 local function debug_adapter_protocol(config)
 	if not config.toggle_breakpoint.disabled then
 		vim.keymap.set("n", config.toggle_breakpoint.keybind, function()
@@ -108,8 +54,6 @@ end
 
 ---@param config dh.keymap.config
 function debug.setup(config)
-	runner(config.debug)
-	runner_current(config.debug)
 	debug_adapter_protocol(config.debug)
 end
 

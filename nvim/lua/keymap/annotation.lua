@@ -67,8 +67,6 @@
 ---@field code_action dh.keymap.config.keybind
 
 ---@class dh.keymap.config.debug
----@field run dh.keymap.config.keybind
----@field run_current dh.keymap.config.keybind
 ---@field toggle_breakpoint dh.keymap.config.keybind
 ---@field toggle_breakpoint_cond dh.keymap.config.keybind
 ---@field continue dh.keymap.config.keybind
@@ -78,9 +76,11 @@
 ---@field step_out dh.keymap.config.keybind
 ---@field inspect dh.keymap.config.keybind
 
----@class dh.keymap.config.cmake
+---@class dh.keymap.config.tasks
 ---@field build dh.keymap.config.keybind
 ---@field run dh.keymap.config.keybind
+---@field debug dh.keymap.config.keybind
+---@field debug_current dh.keymap.config.keybind
 ---@field set_build_type dh.keymap.config.keybind
 
 ---@class dh.keymap.config.overseer
@@ -95,6 +95,6 @@
 ---@field motions dh.keymap.config.motions
 ---@field lsp dh.keymap.config.lsp
 ---@field debug dh.keymap.config.debug
----@field cmake dh.keymap.config.cmake
+---@field tasks dh.keymap.config.tasks
 ---@field overseer dh.keymap.config.overseer
 ---@field style dh.keymap.config.style

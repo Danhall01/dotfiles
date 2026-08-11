@@ -65,8 +65,6 @@ local config = {
 		toggle_header = { "<leader>cc" },
 	},
 	debug = {
-		run = { "<leader><F5>", disabled = true },
-		run_current = { "<leader><F5>" },
 		restart = { "<shift><F5>", disabled = true },
 		continue = { "<F5>", disabled = true },
 		inspect = { "<leader>ds" },
@@ -76,9 +74,11 @@ local config = {
 		step_out = { "<F12>" },
 		step_over = { "<F10>" },
 	},
-	cmake = {
-		build = { "<F4>" },
+	tasks = {
 		run = { "<F5>" },
+		build = { "<F4>" },
+		debug = { "<leader><F5>", disabled = true },
+		debug_current = { "<leader><F5>" },
 		set_build_type = { "<leader><F2>" },
 	},
 	overseer = {
@@ -153,8 +153,6 @@ local validation = {
 		toggle_header = keybinds.key,
 	},
 	debug = {
-		run = keybinds.key,
-		run_current = keybinds.key,
 		restart = keybinds.key,
 		continue = keybinds.key,
 		inspect = keybinds.key,
@@ -164,9 +162,11 @@ local validation = {
 		step_out = keybinds.key,
 		step_over = keybinds.key,
 	},
-	cmake = {
+	tasks = {
 		build = keybinds.key,
 		run = keybinds.key,
+		debug = keybinds.key,
+		debug_current = keybinds.key,
 		set_build_type = keybinds.key,
 	},
 	overseer = {

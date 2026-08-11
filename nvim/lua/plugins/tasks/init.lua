@@ -9,3 +9,6 @@ require("plugins.tasks.cmake").setup(config)
 require("plugins.tasks.dap_logs").setup(config)
 ---@type dh.plugins.tasks.autocmd
 require("plugins.tasks.autocmd").setup(config)
+
+---@type dh.plugins.tasks.runners
+require("plugins.tasks.runners").setup(config)
