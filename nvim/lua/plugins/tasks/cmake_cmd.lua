@@ -1,59 +1,15 @@
----@class dh.plugins.tasks.cmake
-local task_cmake = {}
+---@class dh.plugins.tasks.cmake_cmd
+local cmake_cmd = {
+	cmds = {},
+}
 local g_task_view = {}
 
----@param config dh.plugins.tasks.config
-local function camke_tools_usercmd(config)
-	local cmake = require("cmake-tools")
-	local overseer = require("overseer")
+local cmake = require("cmake-tools")
+local overseer = require("overseer")
+---@param config dh.plugins.config.tasks
+local function camke_tools_usercmd(config) end
 
-	vim.api.nvim_create_user_command("CMakePerf", function()
-		local path = vim.fs.dirname(cmake.get_launch_target_path())
-		local args = unpack(cmake.get_launch_args())
-		args = args or ""
-
-		overseer
-			.new_task({
-				name = "Perf " .. cmake.get_launch_target(),
-				cmd = "perf record --call-graph dwarf " .. cmake.get_launch_target_path() .. args,
-				cwd = path,
-			})
-			:start()
-	end, {})
-
-	vim.api.nvim_create_user_command("CMakeValgrind", function()
-		local path = vim.fs.dirname(cmake.get_launch_target_path())
-		local args = unpack(cmake.get_launch_args())
-		args = args or ""
-
-		overseer
-			.new_task({
-				name = "Valgrind " .. cmake.get_launch_target(),
-				cmd = "valgrind --tool=memcheck --leak-check=full --xml=yes --xml-file=memcheck.xml "
-					.. cmake.get_launch_target_path()
-					.. args,
-				cwd = path,
-			})
-			:start()
-	end, {})
-	vim.api.nvim_create_user_command("CMakeHelgrind", function()
-		local path = vim.fs.dirname(cmake.get_launch_target_path())
-		local args = unpack(cmake.get_launch_args())
-		args = args or ""
-
-		overseer
-			.new_task({
-				name = "Helgrind " .. cmake.get_launch_target(),
-				cmd = "valgrind --tool=helgrind --xml=yes --xml-file=helgrid.xml "
-					.. cmake.get_launch_target_path()
-					.. args,
-				cwd = path,
-			})
-			:start()
-	end, {})
-end
-
----@param config dh.plugins.tasks.config
+---@param config dh.plugins.config.tasks
 local function cmake_tools_setup(config)
 	if config.overseer.timeouts.destroy_on_exit then
 		vim.api.nvim_create_autocmd("ExitPre", {
@@ -158,11 +114,21 @@ local function cmake_tools_setup(config)
 	})
 end
 
----@param config dh.plugins.tasks.config
-function task_cmake.setup(config)
+---@param config dh.plugins.config.tasks
+function cmake_cmd.register(config)
 	vim.api.nvim_create_augroup("dh.plugins.tasks.cmake", {})
 	cmake_tools_setup(config)
 	camke_tools_usercmd(config)
+
+	cmake_cmd.cmds = {
+		"CMakePerf",
+		"CMakeValgrind",
+		"CMakeHelgrind",
+
+		"CMakeGenerate",
+		"CMakeBuild",
+		"CMakeRun",
+	}
 end
 
-return task_cmake
+return cmake_cmd

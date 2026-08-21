@@ -1,5 +1,5 @@
----@class dh.plugins.tasks.dap_logs
-local dap_logs = {}
+---@class dh.plugins.tasks.debug_log_print
+local debug_log_print = { cmds = {} }
 local g_dap_logfile = nil
 local g_log_index = 1
 
@@ -61,7 +61,7 @@ local function orchestrator_display_all(path)
 	return task
 end
 
----@param config dh.plugins.tasks.config.overseer
+---@param config dh.plugins.config.tasks.overseer
 local function setup_components(config)
 	if not config.timeouts.log_events then
 		return
@@ -89,7 +89,7 @@ local function setup_components(config)
 	})
 end
 
----@param config dh.plugins.tasks.config.overseer.debug_log
+---@param config dh.plugins.config.tasks.overseer.debug_log
 local function update_counter(config)
 	local cwd = vim.fn.getcwd()
 	local content = vim.fn.glob(cwd .. "/" .. config.path .. "*", false, true)
@@ -99,7 +99,7 @@ local function update_counter(config)
 	g_log_index = #content + 1
 end
 
----@param config dh.plugins.tasks.config.overseer.debug_log
+---@param config dh.plugins.config.tasks.overseer.debug_log
 local function attach_log_task(config)
 	local function create_logview_task()
 		if not g_dap_logfile then
@@ -149,7 +149,7 @@ local function attach_log_task(config)
 	dap.listeners.after.event_exited["overseer-debug-output"] = create_logview_task
 end
 
----@param config dh.plugins.tasks.config.overseer.debug_log
+---@param config dh.plugins.config.tasks.overseer.debug_log
 local function register_user_commands(config)
 	local cwd = vim.fn.getcwd()
 	vim.api.nvim_create_user_command("DisplayLog", function(argv)
@@ -190,21 +190,26 @@ local function register_user_commands(config)
 	})
 end
 
----@param config dh.plugins.tasks.config
-function dap_logs.setup(config)
+---@param config dh.plugins.config.tasks
+function debug_log_print.register(config)
+	if not config.overseer.debug_log.enabled then
+		return
+	end
 	vim.api.nvim_create_augroup("dh.plugins.tasks.dap_logs", {})
 
-	if config.overseer.debug_log.enabled then
-		setup_components(config.overseer)
-		update_counter(config.overseer.debug_log)
-		if config.overseer.debug_log.display_all_on_enter then
-			vim.schedule(function()
-				orchestrator_display_all(config.overseer.debug_log.path):start()
-			end)
-		end
-		attach_log_task(config.overseer.debug_log)
-		register_user_commands(config.overseer.debug_log)
+	setup_components(config.overseer)
+	update_counter(config.overseer.debug_log)
+	if config.overseer.debug_log.display_all_on_enter then
+		vim.schedule(function()
+			orchestrator_display_all(config.overseer.debug_log.path):start()
+		end)
 	end
+	attach_log_task(config.overseer.debug_log)
+	register_user_commands(config.overseer.debug_log)
+
+	debug_log_print.cmds = {
+		"DisplayLog",
+	}
 end
 
-return dap_logs
+return debug_log_print

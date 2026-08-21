@@ -122,12 +122,19 @@ local function plug_ui()
 	neoplug:add(github("projekt0n/github-nvim-theme"))
 end
 
-local function plug_cpp()
+local function plug_tasks()
+	neoplug:add({
+		github("stevearc/overseer.nvim"),
+		dependencies = {
+			{ github("akinsho/toggleterm.nvim"), version = "*" },
+		},
+	})
+	-- C/C++
 	neoplug:add({
 		github("Civitasv/cmake-tools.nvim"),
 		dependencies = {
-			{ github("akinsho/toggleterm.nvim"), version = "*" },
-			{ github("stevearc/overseer.nvim"), dependencies = github("akinsho/toggleterm.nvim") },
+			github("stevearc/overseer.nvim"),
+			github("akinsho/toggleterm.nvim"),
 		},
 	})
 end
@@ -139,7 +146,7 @@ function plugins.setup()
 	plug_debug()
 	plug_behaviour()
 	plug_ui()
-	plug_cpp()
+	plug_tasks()
 	neoplug:submit()
 end
 
