@@ -124,10 +124,6 @@ function cmake_cmd.register(config)
 		"CMakePerf",
 		"CMakeValgrind",
 		"CMakeHelgrind",
-
-		"CMakeGenerate",
-		"CMakeBuild",
-		"CMakeRun",
 	}
 end
 
