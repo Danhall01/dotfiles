@@ -16,8 +16,7 @@ local function lualine_setup(config)
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			--theme = "horizon",
-			theme = "poimandres",
+			theme = "auto",
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
 			disabled_filetypes = {

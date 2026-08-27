@@ -1,6 +1,6 @@
 ---@type dh.ui.config
 local config = {
-	startup_theme = "github_dark",
+	startup_theme = "mint_skyline",
 }
 
 return config

@@ -120,6 +120,7 @@ local function plug_ui()
 	-- Themes
 	neoplug:add(github("olivercederborg/poimandres.nvim"))
 	neoplug:add(github("projekt0n/github-nvim-theme"))
+	neoplug:add(github("folke/tokyonight.nvim"))
 end
 
 local function plug_tasks()

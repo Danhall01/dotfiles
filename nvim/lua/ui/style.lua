@@ -51,10 +51,10 @@ local function noice(config)
 		},
 		-- FOR NOW, THIS BREAKS THE CMDLINE SO THAT I CANNOT SEE ANYTHING: REMOVE WHEN FIXED
 		cmdline = {
-			enabled = false,
+			enabled = true,
 		},
 		messages = {
-			enabled = false,
+			enabled = true,
 		},
 	}
 	require("noice").setup(opts)
