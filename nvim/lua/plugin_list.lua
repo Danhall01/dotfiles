@@ -99,6 +99,23 @@ local function plug_features()
 		dependencies = github("stevearc/overseer.nvim"),
 	})
 
+	-- Tasks
+	neoplug:add({
+		github("stevearc/overseer.nvim"),
+		dependencies = {
+			{ github("akinsho/toggleterm.nvim"), version = "*" },
+		},
+	})
+	neoplug:add({
+		github("Civitasv/cmake-tools.nvim"),
+		dependencies = {
+			github("stevearc/overseer.nvim"),
+			github("akinsho/toggleterm.nvim"),
+		},
+	})
+end
+
+local function plug_tools()
 	-- Git
 	neoplug:add({
 		github("NeogitOrg/neogit"),
@@ -115,27 +132,17 @@ local function plug_features()
 		},
 	})
 
-	-- Tasks
-	neoplug:add({
-		github("stevearc/overseer.nvim"),
-		dependencies = {
-			{ github("akinsho/toggleterm.nvim"), version = "*" },
-		},
-	})
-	neoplug:add({
-		github("Civitasv/cmake-tools.nvim"),
-		dependencies = {
-			github("stevearc/overseer.nvim"),
-			github("akinsho/toggleterm.nvim"),
-		},
-	})
-
 	-- C/C++
 	neoplug:add(github("J-Cowsert/classlayout.nvim"))
 	neoplug:add({
 		github("madskjeldgaard/cppman.nvim"),
 		dependencies = { github("MunifTanjim/nui.nvim") },
 	})
+
+	-- Profiling
+	-- Tests
+	-- Code analysis
+	-- Error checking
 end
 
 local function plug_ui()
@@ -170,9 +177,10 @@ function plugins.setup()
 	plug_LSP()
 	plug_navigation()
 	plug_features()
+	plug_tools()
 	plug_ui()
 
-	neoplug:submit()
+	neoplug:submit({ verbal = true })
 end
 
 return plugins

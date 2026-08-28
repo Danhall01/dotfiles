@@ -142,8 +142,13 @@ local function topological_sort(plugin_graph)
 	return sorted
 end
 
+---@class dh.neoplug.opts
+---@field verbal? boolean Tells neoplug to notify with additional information
+
 ---Submit the current plugin list to vim.pack, then clean the internal list for new add
-function neoplug:submit()
+---@param opts? dh.neoplug.opts
+function neoplug:submit(opts)
+	opts = opts or {}
 	local sorted = topological_sort(self.graph)
 
 	-- Gather the plugin data from sorted list
@@ -153,8 +158,16 @@ function neoplug:submit()
 	end
 
 	vim.pack.add(plugin_list)
-	self.graph = nil
-	self.plugins = nil
+	if opts.verbal then
+		local plugin_count = #plugin_list
+		vim.schedule(function()
+			vim.notify(("Loaded %d plugins"):format(plugin_count))
+		end)
+	end
+
+	-- Cleanup in case user wants to do another submit
+	self.graph = {}
+	self.plugins = {}
 end
 
 return neoplug
