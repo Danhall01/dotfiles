@@ -29,7 +29,7 @@ local config = {
 			debug_log = {
 				enabled = true,
 				display_all_on_enter = true,
-				path = "bin/",
+				path = ".nvim_logs/",
 				log_name = "dap",
 			},
 			timeouts = {
