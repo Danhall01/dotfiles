@@ -21,6 +21,7 @@ function git.setup(config)
 			telescope = true,
 			diffview = true,
 		},
+		process_spinner = true,
 	})
 	vim.api.nvim_create_user_command("NeogitUpdate", function()
 		neogit.refresh()
