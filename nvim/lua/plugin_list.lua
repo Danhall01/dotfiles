@@ -99,11 +99,20 @@ local function plug_features()
 		dependencies = github("stevearc/overseer.nvim"),
 	})
 
-	-- C/C++
-	neoplug:add(github("J-Cowsert/classlayout.nvim"))
+	-- Git
 	neoplug:add({
-		github("madskjeldgaard/cppman.nvim"),
-		dependencies = { github("MunifTanjim/nui.nvim") },
+		github("NeogitOrg/neogit"),
+		dependencies = {
+			{ github("sindrets/diffview.nvim"), dependencies = github("nvim-tree/nvim-web-devicons") },
+			github("m00qek/baleia.nvim"),
+			github("nvim-telescope/telescope.nvim"),
+		},
+	})
+	neoplug:add({
+		github("olacin/telescope-cc.nvim"),
+		dependencies = {
+			github("nvim-telescope/telescope.nvim"),
+		},
 	})
 
 	-- Tasks
@@ -119,6 +128,13 @@ local function plug_features()
 			github("stevearc/overseer.nvim"),
 			github("akinsho/toggleterm.nvim"),
 		},
+	})
+
+	-- C/C++
+	neoplug:add(github("J-Cowsert/classlayout.nvim"))
+	neoplug:add({
+		github("madskjeldgaard/cppman.nvim"),
+		dependencies = { github("MunifTanjim/nui.nvim") },
 	})
 end
 

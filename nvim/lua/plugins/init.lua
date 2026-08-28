@@ -9,12 +9,15 @@ require("plugins.navigation").setup(config)
 require("plugins.typing").setup(config)
 ---@type dh.plugins.treesitter
 require("plugins.treesitter").setup(config)
+
 ---@type dh.plugins.cpptools
 require("plugins.cpptools").setup(config)
 
--- General Behaviour
 ---@type dh.plugins.session
 require("plugins.session").setup(config)
+
+---@type dh.plugins.git
+require("plugins.git").setup(config)
 
 -- Task manager
 ---@type dh.plugins.tasks.task_manager
