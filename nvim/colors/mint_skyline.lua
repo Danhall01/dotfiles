@@ -1,7 +1,4 @@
--- Named after "Mint skyline" named by Nick and created by @Danhall01,
--- which is what the original `spec.syntax` overrides this scheme is built
--- from were modeled on.
-
+-- Named after "Mint skyline" from @Nick and created by @Danhall01,
 local colors_name = "mint_skyline"
 
 if vim.g.colors_name then
@@ -49,9 +46,7 @@ local p = {
 	-- SYNTAX / CODE PALETTE
 	-----------------------------------------------------------------------
 	-- Family 1: BLUE -- low-key, high-frequency tokens (identifiers,
-	-- strings, operators, comments). Kept desaturated and hue-locked around
-	-- 205-210 degrees so none of them fight for attention; they're meant to
-	-- recede so the teal/cyan/purple families (below) pop.
+	-- strings, operators, comments).
 	comment = "#6F879F", -- H210 S20 L53  (was #647A91, contrast 4.27 -> 5.08)
 	operator_sym = "#95A8BB", -- H210 S22 L66  (was #79C0FF @ S100 -- too vivid for something on every line)
 	fg_default = "#E6EDF3", -- identifiers / brackets / punctuation: same as fg1, deliberately neutral
@@ -60,30 +55,26 @@ local p = {
 	variable_builtin = "#98C2E7", -- H208 S62 L75  self/this/NULL-ish builtins, was colliding with operator blue
 	string_fg = "#90B4D5", -- H209 S45 L70  (was #91B4D5, kept -- already well separated)
 
-	-- Family 2: TEAL/CYAN -- structural + literal-data tokens. Spread across
-	-- hue 166-190 and lightness 38-63 in fixed steps so Type, StorageClass,
-	-- Function and Constant/Number no longer collide (they used to sit
-	-- within a 16-degree, 10%-lightness box).
-	type_fg = "#309189", -- H175 S50 L38  types/structs/classes (was #26867D, kept close)
+	-- Family 2: TEAL/CYAN -- structural + literal-data tokens.
+	type_fg = "#309189", -- H175 S50 L38  types/structs/classes
 	storageclass = "#38B296", -- H166 S52 L46  static/const/volatile/register/inline
-	func_fg = "#4AACBF", -- H190 S48 L52  ALL function calls, user or library: foo() and free() are the same color on purpose
+	func_fg = "#4AACBF", -- H190 S48 L52  ALL function calls, user or library
 	func_def = "#6CA9EF", -- H288 S78 L73  function DEFINITIONS/headers: void func_name(...) {
-	type_builtin = "#38C2C2", -- H180 S55 L49  int/char/float/void/bool (was #FF7B72 salmon -- off-palette, now in-family)
+	type_builtin = "#38C2C2", -- H180 S55 L49  int/char/float/void/bool
 	namespace_fg = "#5CBCB0", -- H172 S42 L55  namespaces / Lua's string./table./math. libraries
-	constructor_fg = "#60C2CD", -- H186 S52 L59  table constructors etc. (was #FFA657 orange -- off-palette)
+	constructor_fg = "#60C2CD", -- H186 S52 L59  table constructors etc.
 
-	const_number = "#40E5E7", -- H181 S78 L58  numeric/string literals (was #31EAEA, kept almost exactly)
-	const_builtin = "#66D9DB", -- H181 S62 L63  true/false/nil/NULL (was accidentally #79C0FF operator blue)
-	macro_global_c = "#66EEF0", -- H181 S82 L67  your special "global-scope C macro" pop, returned to match the cyan family instead of clashing with it
+	const_number = "#40E5E7", -- H181 S78 L58  numeric/string literals
+	const_builtin = "#66D9DB", -- H181 S62 L63  true/false/nil/NULL
+	macro_global_c = "#66EEF0", -- H181 S82 L67
 
-	-- Family 3: PURPLE/INDIGO -- reserved words. Split into three distinct
-	-- lanes instead of one shared purple, fixing the two contrast failures.
+	-- Family 3: PURPLE/INDIGO -- reserved words.
 	keyword_fg = "#9869F7", -- H260 S90 L69  general keywords: return, break, goto, sizeof, local, function, end
 	conditional = "#8181DF", -- H240 S60 L69  NEW LANE: if/else/for/while/do/switch/repeat/until (was #135048, 2.0:1 contrast -> now 5.2:1, and out of the crowded teal cluster)
 	exception_fg = "#887CDA", -- H248 S56 L67  throw/try/catch (C++)
 	preproc = "#A475CC", -- H272 S46 L63  #include/#define/#ifdef (was #6C58A6, 3.2:1 contrast -> now 5.4:1)
 
-	-- Family 4: PINK accent -- your original choice, unchanged. Used only
+	-- Family 4: PINK accent
 	-- for "special" literal content: regex, escape sequences, format specs.
 	regex_special = "#E3C0C7", -- H347 S38 L82 (was #E2BEC6, kept essentially as-is)
 }
@@ -334,9 +325,9 @@ groups["@lsp.type.variable"] = { fg = p.variable }
 groups["@lsp.type.variable.lua"] = {}
 groups["@lsp.type.parameter"] = { link = "@variable.parameter" }
 groups["@lsp.type.property"] = { fg = p.variable_member }
-groups["@lsp.type.function"] = { link = "@function.call" } -- bare LSP type = calls/refs, unless a more specific "definition" modifier below overrides it
+groups["@lsp.type.function"] = { link = "@function.call" }
 groups["@lsp.type.method"] = { link = "@function.call" }
-groups["@lsp.type.class"] = { link = "@type" } -- moved off @function: classes are types
+groups["@lsp.type.class"] = { link = "@type" }
 groups["@lsp.type.struct"] = { link = "@type" }
 groups["@lsp.type.interface"] = { link = "@type" }
 groups["@lsp.type.enum"] = { link = "@type" }
@@ -365,7 +356,7 @@ groups["@lsp.typemod.method.definition.cpp"] = { fg = p.func_def } -- MyClass::m
 -- C setup mirrored into C++
 groups["@lsp.typemod.macro.globalscope.c"] = { fg = p.macro_global_c }
 groups["@lsp.typemod.macro.globalscope.cpp"] = { fg = p.macro_global_c }
-groups["@lsp.typemod.class.filescope.c"] = { fg = p.type_fg } -- struct/class tags -> Type family (was purple, now consistent with @lsp.type.class)
+groups["@lsp.typemod.class.filescope.c"] = { fg = p.type_fg } -- struct/class tags -> Type family
 groups["@lsp.typemod.class.filescope.cpp"] = { fg = p.type_fg }
 groups["@lsp.typemod.property.classScope.c"] = { fg = p.variable_member }
 groups["@lsp.typemod.property.classScope.cpp"] = { fg = p.variable_member }
