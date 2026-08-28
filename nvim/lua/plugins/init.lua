@@ -3,6 +3,7 @@ local config = require("plugins.config")
 
 ---@type dh.plugins.dependencies
 require("plugins.dependencies").setup(config)
+
 ---@type dh.plugins.navigation
 require("plugins.navigation").setup(config)
 ---@type dh.plugins.typing
@@ -18,6 +19,11 @@ require("plugins.session").setup(config)
 
 ---@type dh.plugins.git
 require("plugins.git").setup(config)
+
+---@type dh.plugins.tests
+require("plugins.tests").setup(config)
+---@type dh.plugins.code_analysis
+require("plugins.code_analysis").setup(config)
 
 -- Task manager
 ---@type dh.plugins.tasks.task_manager

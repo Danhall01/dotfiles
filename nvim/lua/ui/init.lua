@@ -7,3 +7,6 @@ require("ui.theme").setup(config)
 require("ui.status_line").setup(config)
 ---@type dh.ui.style
 require("ui.style").setup(config)
+
+---@type dh.ui.layout
+require("ui.layout").setup(config)

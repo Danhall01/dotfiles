@@ -15,6 +15,7 @@ end
 
 ---@param config dh.plugins.config
 function treesitter.setup(config)
+	require("nvim-treesitter").setup({})
 	vim.api.nvim_create_augroup("dh.plugins.treesitter", { clear = true })
 	autostart()
 end

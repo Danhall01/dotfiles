@@ -161,6 +161,10 @@
       "rev": "a93d9f6d6defdac4bcd6d2c8ba988650e42e0a0e",
       "src": "https://github.com/stevearc/overseer.nvim"
     },
+    "perfanno.nvim": {
+      "rev": "7b4b876374607b139a029563ad0a27065edcaf7b",
+      "src": "https://github.com/t-troebst/perfanno.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -172,6 +176,10 @@
     "resession.nvim": {
       "rev": "0983fbdd3fe938c80fb7dd33817f08f428426ac8",
       "src": "https://github.com/stevearc/resession.nvim"
+    },
+    "sanity.nvim": {
+      "rev": "4025f312e08028908527b21666cfa80817b43b5a",
+      "src": "https://github.com/dlyongemallo/sanity.nvim"
     },
     "telescope-cc.nvim": {
       "rev": "c3cf3489178f945e3efdf0bd15bfb8c353279755",

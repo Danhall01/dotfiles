@@ -16,11 +16,11 @@ require("lsp.init")
 require("commands.init")
 require("autocmd.init")
 
--- UI
-require("ui.init")
-
 -- My Plugins / Custom Setup
 require("modules.init")
+
+-- UI
+require("ui.init")
 
 -- Keymaps
 require("keymap.init")

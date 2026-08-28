@@ -139,10 +139,11 @@ local function plug_tools()
 		dependencies = { github("MunifTanjim/nui.nvim") },
 	})
 
-	-- Profiling
-	-- Tests
 	-- Code analysis
-	-- Error checking
+	neoplug:add(github("dlyongemallo/sanity.nvim"))
+	neoplug:add(github("t-troebst/perfanno.nvim"))
+
+	-- Tests
 end
 
 local function plug_ui()
