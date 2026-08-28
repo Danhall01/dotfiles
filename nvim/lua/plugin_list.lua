@@ -13,19 +13,6 @@ local function github(plugin)
 	return "https://github.com/" .. plugin
 end
 
-local function plug_typing()
-	neoplug:add({
-		github("saghen/blink.cmp"),
-		dependencies = {
-			github("saghen/blink.lib"),
-			github("rafamadriz/friendly-snippets"),
-			github("xzbdmw/colorful-menu.nvim"),
-			github("folke/lazydev.nvim"),
-		},
-	})
-	neoplug:add(github("windwp/nvim-autopairs"))
-end
-
 local function plug_navigation()
 	neoplug:add({
 		github("nvim-telescope/telescope.nvim"),
@@ -59,12 +46,17 @@ local function plug_LSP()
 		},
 	})
 	neoplug:add("https://git.sr.ht/~p00f/clangd_extensions.nvim")
+	neoplug:add({
+		github("Badhi/nvim-treesitter-cpp-tools"),
+		dependencies = {
+			github("nvim-treesitter/nvim-treesitter"),
+		},
+	})
 
 	neoplug:add(github("stevearc/conform.nvim"))
 	neoplug:add(github("mfussenegger/nvim-lint"))
-end
 
-local function plug_debug()
+	-- Debug
 	neoplug:add({
 		github("mfussenegger/nvim-dap"),
 		dependencies = {
@@ -88,10 +80,45 @@ local function plug_debug()
 	})
 end
 
-local function plug_behaviour()
+local function plug_features()
+	-- Typing
+	neoplug:add({
+		github("saghen/blink.cmp"),
+		dependencies = {
+			github("saghen/blink.lib"),
+			github("rafamadriz/friendly-snippets"),
+			github("xzbdmw/colorful-menu.nvim"),
+			github("folke/lazydev.nvim"),
+		},
+	})
+	neoplug:add(github("windwp/nvim-autopairs"))
+
+	-- Session
 	neoplug:add({
 		github("stevearc/resession.nvim"),
 		dependencies = github("stevearc/overseer.nvim"),
+	})
+
+	-- C/C++
+	neoplug:add(github("J-Cowsert/classlayout.nvim"))
+	neoplug:add({
+		github("madskjeldgaard/cppman.nvim"),
+		dependencies = { github("MunifTanjim/nui.nvim") },
+	})
+
+	-- Tasks
+	neoplug:add({
+		github("stevearc/overseer.nvim"),
+		dependencies = {
+			{ github("akinsho/toggleterm.nvim"), version = "*" },
+		},
+	})
+	neoplug:add({
+		github("Civitasv/cmake-tools.nvim"),
+		dependencies = {
+			github("stevearc/overseer.nvim"),
+			github("akinsho/toggleterm.nvim"),
+		},
 	})
 end
 
@@ -123,31 +150,12 @@ local function plug_ui()
 	neoplug:add(github("folke/tokyonight.nvim"))
 end
 
-local function plug_tasks()
-	neoplug:add({
-		github("stevearc/overseer.nvim"),
-		dependencies = {
-			{ github("akinsho/toggleterm.nvim"), version = "*" },
-		},
-	})
-	-- C/C++
-	neoplug:add({
-		github("Civitasv/cmake-tools.nvim"),
-		dependencies = {
-			github("stevearc/overseer.nvim"),
-			github("akinsho/toggleterm.nvim"),
-		},
-	})
-end
-
 function plugins.setup()
-	plug_typing()
-	plug_navigation()
 	plug_LSP()
-	plug_debug()
-	plug_behaviour()
+	plug_navigation()
+	plug_features()
 	plug_ui()
-	plug_tasks()
+
 	neoplug:submit()
 end
 

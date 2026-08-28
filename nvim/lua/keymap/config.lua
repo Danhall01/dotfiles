@@ -88,6 +88,11 @@ local config = {
 	style = {
 		toggle_colorizer = { "<leader>ct" },
 	},
+	cpp = {
+		class_layout_view = { "", disabled = true },
+		man_cursor = { "", disabled = true },
+		man_search = { "", disabled = true },
+	},
 }
 
 ---@type dh.keymap.helper.keybind
@@ -175,6 +180,11 @@ local validation = {
 	},
 	style = {
 		toggle_colorizer = keybinds.key,
+	},
+	cpp = {
+		class_layout_view = keybinds.key,
+		man_cursor = keybinds.key,
+		man_search = keybinds.key,
 	},
 }
 return keybinds.parse(config, validation)

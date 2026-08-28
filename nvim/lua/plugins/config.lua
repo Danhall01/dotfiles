@@ -66,6 +66,9 @@ local config = {
 			},
 		},
 	},
+	cpptools = {
+		keybinds = keybinds.cpp,
+	},
 }
 
 return config

@@ -90,6 +90,11 @@
 ---@class dh.keymap.config.style
 ---@field toggle_colorizer dh.keymap.config.keybind
 
+---@class dh.keymap.config.cpp
+---@field man_cursor dh.keymap.config.keybind
+---@field man_search dh.keymap.config.keybind
+---@field class_layout_view dh.keymap.config.keybind
+
 ---@class dh.keymap.config
 ---@field navigation dh.keymap.config.navigation
 ---@field motions dh.keymap.config.motions
@@ -98,3 +103,4 @@
 ---@field tasks dh.keymap.config.tasks
 ---@field overseer dh.keymap.config.overseer
 ---@field style dh.keymap.config.style
+---@field cpp dh.keymap.config.cpp

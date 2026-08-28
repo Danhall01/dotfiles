@@ -12,6 +12,10 @@
       "rev": "997d20e6bc83ea1a6223c08d2b9db76943abf56b",
       "src": "https://git.sr.ht/~p00f/clangd_extensions.nvim"
     },
+    "classlayout.nvim": {
+      "rev": "534d4cb6a8f1666b3f69c8540760a869aff651a3",
+      "src": "https://github.com/J-Cowsert/classlayout.nvim"
+    },
     "cmake-tools.nvim": {
       "rev": "22859d754b5de738cfe9945e0910729f63deefd0",
       "src": "https://github.com/Civitasv/cmake-tools.nvim"
@@ -23,6 +27,10 @@
     "conform.nvim": {
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "cppman.nvim": {
+      "rev": "801c5b178ee1246bc8ee044984d5758933b2baca",
+      "src": "https://github.com/madskjeldgaard/cppman.nvim"
     },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
@@ -120,6 +128,10 @@
     "nvim-treesitter-context": {
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
+    "nvim-treesitter-cpp-tools": {
+      "rev": "3343f8f693497a249823f81270a3b4f2b5f46844",
+      "src": "https://github.com/Badhi/nvim-treesitter-cpp-tools"
     },
     "nvim-web-devicons": {
       "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",

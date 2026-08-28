@@ -52,8 +52,12 @@
 ---@field overseer dh.plugins.config.tasks.overseer
 ---@field runners dh.plugins.config.tasks.runners
 
+---@class dh.plugins.config.cpptools
+---@field keybinds dh.keymap.config.cpp
+
 ---@class dh.plugins.config
 ---@field blink_cmp dh.plugins.config.blink_cmp
 ---@field oil dh.plugins.config.oil
 ---@field session dh.plugins.config.session
 ---@field tasks dh.plugins.config.tasks
+---@field cpptools dh.plugins.config.cpptools
